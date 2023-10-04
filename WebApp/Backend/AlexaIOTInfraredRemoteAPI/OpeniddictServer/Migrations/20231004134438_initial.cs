@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpeniddictServer.Migrations
 {
-    public partial class aspnet_core_identity_fido2 : Migration
+    /// <inheritdoc />
+    public partial class initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -46,27 +48,6 @@ namespace OpeniddictServer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FidoStoredCredential",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    PublicKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    UserHandle = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    SignatureCounter = table.Column<long>(type: "bigint", nullable: false),
-                    CredType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AaGuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DescriptorJson = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FidoStoredCredential", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -350,6 +331,7 @@ namespace OpeniddictServer.Migrations
                 filter: "[ReferenceId] IS NOT NULL");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -366,9 +348,6 @@ namespace OpeniddictServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "FidoStoredCredential");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictScopes");

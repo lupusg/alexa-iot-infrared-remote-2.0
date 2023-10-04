@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 
@@ -9,7 +10,7 @@ import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 export class AppComponent {
   title = 'AlexaIOTInfraredRemoteUI';
 
-  constructor(private oidcSecurityService: OidcSecurityService) { };
+  constructor(private oidcSecurityService: OidcSecurityService, private http: HttpClient) { };
 
   ngOnInit() {
     this.oidcSecurityService
@@ -19,8 +20,8 @@ export class AppComponent {
           loginResponse;
 
         /*...*/
-        console.log(loginResponse);
       });
+
   }
 
   login() {

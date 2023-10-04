@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers
 {
     [ApiController]
+    [Authorize("dataAIIRPolicy")]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {

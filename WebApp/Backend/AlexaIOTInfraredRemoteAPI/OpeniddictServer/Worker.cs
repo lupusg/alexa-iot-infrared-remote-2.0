@@ -27,16 +27,16 @@ namespace OpeniddictServer
                 var manager = provider.GetRequiredService<IOpenIddictApplicationManager>();
 
                 // Angular UI client
-                if (await manager.FindByClientIdAsync("angularclient") is null)
+                if (await manager.FindByClientIdAsync("aiirui") is null)
                 {
                     await manager.CreateAsync(new OpenIddictApplicationDescriptor
                     {
-                        ClientId = "angularclient",
+                        ClientId = "aiirui",
                         ConsentType = ConsentTypes.Explicit,
-                        DisplayName = "angular client PKCE",
+                        DisplayName = "Alexa IoT Infrared Remote UI",
                         DisplayNames =
                         {
-                            [CultureInfo.GetCultureInfo("fr-FR")] = "Application cliente MVC"
+                            [CultureInfo.GetCultureInfo("en-US")] = "Alexa IoT Infrared Remote UI"
                         },
                         PostLogoutRedirectUris =
                         {
@@ -58,7 +58,7 @@ namespace OpeniddictServer
                             Permissions.Scopes.Email,
                             Permissions.Scopes.Profile,
                             Permissions.Scopes.Roles,
-                            Permissions.Prefixes.Scope + "dataEventRecords"
+                            Permissions.Prefixes.Scope + "dataAIIR"
                         },
                         Requirements =
                         {
@@ -67,31 +67,13 @@ namespace OpeniddictServer
                     });
                 }
 
-                // API application CC
-                if (await manager.FindByClientIdAsync("CC") == null)
-                {
-                    await manager.CreateAsync(new OpenIddictApplicationDescriptor
-                    {
-                        ClientId = "CC",
-                        ClientSecret = "cc_secret",
-                        DisplayName = "CC for protected API",
-                        Permissions =
-                    {
-                        Permissions.Endpoints.Authorization,
-                        Permissions.Endpoints.Token,
-                        Permissions.GrantTypes.ClientCredentials,
-                        Permissions.Prefixes.Scope + "dataEventRecords"
-                    }
-                    });
-                }
-
                 // API
-                if (await manager.FindByClientIdAsync("rs_dataEventRecordsApi") == null)
+                if (await manager.FindByClientIdAsync("rs_dataAIIR") == null)
                 {
                     var descriptor = new OpenIddictApplicationDescriptor
                     {
-                        ClientId = "rs_dataEventRecordsApi",
-                        ClientSecret = "dataEventRecordsSecret",
+                        ClientId = "rs_dataAIIR",
+                        ClientSecret = "dataAIIRSecret",
                         Permissions =
                         {
                             Permissions.Endpoints.Introspection
@@ -100,69 +82,25 @@ namespace OpeniddictServer
 
                     await manager.CreateAsync(descriptor);
                 }
-
-                // Blazor Hosted
-                if (await manager.FindByClientIdAsync("blazorcodeflowpkceclient") is null)
-                {
-                    await manager.CreateAsync(new OpenIddictApplicationDescriptor
-                    {
-                        ClientId = "blazorcodeflowpkceclient",
-                        ConsentType = ConsentTypes.Explicit,
-                        DisplayName = "Blazor code PKCE",
-                        DisplayNames =
-                        {
-                            [CultureInfo.GetCultureInfo("fr-FR")] = "Application cliente MVC"
-                        },
-                        PostLogoutRedirectUris =
-                        {
-                            new Uri("https://localhost:44348/signout-callback-oidc"),
-                            new Uri("https://localhost:5001/signout-callback-oidc")
-                        },
-                        RedirectUris =
-                        {
-                            new Uri("https://localhost:44348/signin-oidc"),
-                            new Uri("https://localhost:5001/signin-oidc")
-                        },
-                        ClientSecret = "codeflow_pkce_client_secret",
-                        Permissions =
-                        {
-                            Permissions.Endpoints.Authorization,
-                            Permissions.Endpoints.Logout,
-                            Permissions.Endpoints.Token,
-                            Permissions.Endpoints.Revocation,
-                            Permissions.GrantTypes.AuthorizationCode,
-                            Permissions.GrantTypes.RefreshToken,
-                            Permissions.ResponseTypes.Code,
-                            Permissions.Scopes.Email,
-                            Permissions.Scopes.Profile,
-                            Permissions.Scopes.Roles,
-                            Permissions.Prefixes.Scope + "dataEventRecords"
-                        },
-                        Requirements =
-                        {
-                            Requirements.Features.ProofKeyForCodeExchange
-                        }
-                    });
-                }
             }
 
             static async Task RegisterScopesAsync(IServiceProvider provider)
             {
                 var manager = provider.GetRequiredService<IOpenIddictScopeManager>();
 
-                if (await manager.FindByNameAsync("dataEventRecords") is null)
+                if (await manager.FindByNameAsync("dataAIIR") is null)
                 {
                     await manager.CreateAsync(new OpenIddictScopeDescriptor
                     {
-                        DisplayName = "dataEventRecords API access",
+                        DisplayName = "AIIR Resource Server",
                         DisplayNames =
                         {
-                            [CultureInfo.GetCultureInfo("fr-FR")] = "Accès à l'API de démo"
+                            [CultureInfo.GetCultureInfo("en-US")] = "AIIR Resource Server"
                         },
-                        Name = "dataEventRecords",
+                        Name = "dataAIIR",
                         Resources =
                         {
-                            "rs_dataEventRecordsApi"
+                            "rs_dataAIIR"
                         }
                     });
                 }

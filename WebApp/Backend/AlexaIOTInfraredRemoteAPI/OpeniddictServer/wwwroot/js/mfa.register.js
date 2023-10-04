@@ -60,9 +60,6 @@ async function handleRegisterSubmit(event) {
 
     //console.log("Credential Options Formatted", makeCredentialOptions);
 
-    const fido2TapYourSecurityKeyToFinishRegistration = document.getElementById('fido2TapYourSecurityKeyToFinishRegistration').innerText;
-    document.getElementById('fido2mfadisplay').innerHTML += '<br><b>' + fido2TapYourSecurityKeyToFinishRegistration +'</b><img src = "/images/securitykey.min.svg" alt = "fido login" />';
-
     //Swal.fire({
     //    title: 'Registering...',
     //    text: 'Tap your security key to finish registration.',
