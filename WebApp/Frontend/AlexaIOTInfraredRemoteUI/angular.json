@@ -39,8 +39,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -77,7 +77,11 @@
               "browserTarget": "AlexaIOTInfraredRemoteUI:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "sslCert": "ssl/server.crt",
+            "sslKey": "ssl/server.key"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
