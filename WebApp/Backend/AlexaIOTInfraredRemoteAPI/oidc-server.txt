@@ -1,0 +1,119 @@
+2023-10-04 13:42:52.402 +03:00 [INF] User profile is available. Using 'C:\Users\lupus\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-04 13:42:52.715 +03:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-10-04 13:42:52.716 +03:00 [INF] Quartz Scheduler created
+2023-10-04 13:42:52.717 +03:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-10-04 13:42:52.717 +03:00 [INF] RAMJobStore initialized.
+2023-10-04 13:42:52.718 +03:00 [INF] Quartz Scheduler 3.7.0.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized
+2023-10-04 13:42:52.718 +03:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-10-04 13:42:52.719 +03:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-10-04 13:42:52.728 +03:00 [INF] Adding 1 jobs, 1 triggers.
+2023-10-04 13:42:52.730 +03:00 [INF] Adding job: OpenIddict/Quartz.NET integration.OpenIddict job
+2023-10-04 13:42:56.192 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2023-10-04 13:42:56.259 +03:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2023-10-04 13:42:56.558 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-04 13:42:56.639 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-04 13:42:56.643 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-04 13:42:56.645 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-04 13:42:56.662 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ConcurrencyToken], [o].[Description], [o].[Descriptions], [o].[DisplayName], [o].[DisplayNames], [o].[Name], [o].[Properties], [o].[Resources]
+FROM [OpenIddictScopes] AS [o]
+WHERE [o].[Name] = @__name_0
+2023-10-04 13:42:57.805 +03:00 [INF] Now listening on: https://localhost:44395
+2023-10-04 13:42:57.806 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-04 13:42:57.807 +03:00 [INF] Hosting environment: Development
+2023-10-04 13:42:57.807 +03:00 [INF] Content root path: C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer
+2023-10-04 13:42:57.811 +03:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2023-10-04 13:42:58.835 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/ - -
+2023-10-04 13:42:59.880 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-04 13:42:59.890 +03:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-04 13:43:13.413 +03:00 [INF] Executing ViewResult, running view Index.
+2023-10-04 13:43:14.484 +03:00 [INF] Executed ViewResult - view Index executed in 14582.6379ms.
+2023-10-04 13:43:14.488 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer) in 14595.3675ms
+2023-10-04 13:43:14.489 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-04 13:43:14.497 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/ - - - 200 - text/html;+charset=utf-8 15664.6093ms
+2023-10-04 13:43:14.947 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2023-10-04 13:43:14.948 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/css/site.css - -
+2023-10-04 13:43:14.947 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-10-04 13:43:14.947 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/lib/jquery/dist/jquery.min.js - -
+2023-10-04 13:43:14.947 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2023-10-04 13:43:14.949 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - -
+2023-10-04 13:43:14.974 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 24.7533ms
+2023-10-04 13:43:14.975 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer\wwwroot\js\site.js'
+2023-10-04 13:43:14.978 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 text/javascript 30.1795ms
+2023-10-04 13:43:14.989 +03:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer\wwwroot\css\site.css'
+2023-10-04 13:43:14.989 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2023-10-04 13:43:14.990 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/css/bootstrap.min.css - - - 200 155764 text/css 43.0137ms
+2023-10-04 13:43:14.990 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/css/site.css - - - 200 1417 text/css 43.0750ms
+2023-10-04 13:43:15.015 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2023-10-04 13:43:15.016 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 200 78641 text/javascript 68.5919ms
+2023-10-04 13:43:15.023 +03:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer\wwwroot\lib\jquery\dist\jquery.min.js'
+2023-10-04 13:43:15.024 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/lib/jquery/dist/jquery.min.js - - - 200 89478 text/javascript 76.8827ms
+2023-10-04 13:43:15.221 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/favicon.ico - -
+2023-10-04 13:43:15.227 +03:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer\wwwroot\favicon.ico'
+2023-10-04 13:43:15.228 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/favicon.ico - - - 200 5430 image/x-icon 6.7948ms
+2023-10-04 13:43:20.349 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/ - -
+2023-10-04 13:43:20.354 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-04 13:43:20.355 +03:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-04 13:43:20.357 +03:00 [INF] Executing ViewResult, running view Index.
+2023-10-04 13:43:20.364 +03:00 [INF] Executed ViewResult - view Index executed in 7.3061ms.
+2023-10-04 13:43:20.365 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer) in 8.5523ms
+2023-10-04 13:43:20.365 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-04 13:43:20.366 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/ - - - 200 - text/html;+charset=utf-8 17.2684ms
+2023-10-04 13:43:20.805 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/Home/Privacy - -
+2023-10-04 13:43:20.814 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Privacy (OpeniddictServer)'
+2023-10-04 13:43:20.816 +03:00 [INF] Route matched with {action = "Privacy", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Privacy() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-04 13:43:21.055 +03:00 [INF] Executing ViewResult, running view Privacy.
+2023-10-04 13:43:21.069 +03:00 [INF] Executed ViewResult - view Privacy executed in 251.4483ms.
+2023-10-04 13:43:21.069 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Privacy (OpeniddictServer) in 252.1559ms
+2023-10-04 13:43:21.070 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Privacy (OpeniddictServer)'
+2023-10-04 13:43:21.071 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/Home/Privacy - - - 200 - text/html;+charset=utf-8 265.9486ms
+2023-10-04 13:43:21.529 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - -
+2023-10-04 13:43:21.530 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 0.8981ms
+2023-10-04 13:43:22.076 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/Home/Privacy - -
+2023-10-04 13:43:22.080 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Privacy (OpeniddictServer)'
+2023-10-04 13:43:22.080 +03:00 [INF] Route matched with {action = "Privacy", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Privacy() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-04 13:43:22.081 +03:00 [INF] Executing ViewResult, running view Privacy.
+2023-10-04 13:43:22.082 +03:00 [INF] Executed ViewResult - view Privacy executed in 1.25ms.
+2023-10-04 13:43:22.083 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Privacy (OpeniddictServer) in 1.6157ms
+2023-10-04 13:43:22.083 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Privacy (OpeniddictServer)'
+2023-10-04 13:43:22.084 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/Home/Privacy - - - 200 - text/html;+charset=utf-8 7.5807ms
+2023-10-04 13:43:22.490 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - -
+2023-10-04 13:43:22.491 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 0.9663ms
+2023-10-04 13:43:22.546 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/ - -
+2023-10-04 13:43:22.547 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-04 13:43:22.548 +03:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-04 13:43:22.548 +03:00 [INF] Executing ViewResult, running view Index.
+2023-10-04 13:43:22.550 +03:00 [INF] Executed ViewResult - view Index executed in 1.2873ms.
+2023-10-04 13:43:22.550 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer) in 1.7898ms
+2023-10-04 13:43:22.551 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-04 13:43:22.551 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/ - - - 200 - text/html;+charset=utf-8 4.8645ms
+2023-10-04 13:43:22.948 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - -
+2023-10-04 13:43:22.949 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 1.3236ms
