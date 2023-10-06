@@ -1,16 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'AlexaIOTInfraredRemoteUI';
 
-  constructor(private oidcSecurityService: OidcSecurityService, private http: HttpClient) { };
+  constructor(private oidcSecurityService: OidcSecurityService) {}
 
   ngOnInit() {
     this.oidcSecurityService
@@ -21,7 +20,6 @@ export class AppComponent {
 
         /*...*/
       });
-
   }
 
   login() {
@@ -33,5 +31,4 @@ export class AppComponent {
       .logoff()
       .subscribe((result) => console.log(result));
   }
-
 }
