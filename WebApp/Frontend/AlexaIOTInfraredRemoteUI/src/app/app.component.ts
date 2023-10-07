@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,17 @@ import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 export class AppComponent implements OnInit {
   title = 'AlexaIOTInfraredRemoteUI';
 
-  constructor(private oidcSecurityService: OidcSecurityService) {}
+  constructor(
+    private oidcSecurityService: OidcSecurityService,
+    private primengConfig: PrimeNGConfig,
+  ) {}
 
   ngOnInit() {
+    this.initOidcSecurityService();
+    this.initPrimeNGConfig();
+  }
+
+  private initOidcSecurityService() {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((loginResponse: LoginResponse) => {
@@ -20,6 +30,10 @@ export class AppComponent implements OnInit {
 
         /*...*/
       });
+  }
+
+  private initPrimeNGConfig() {
+    this.primengConfig.ripple = true;
   }
 
   login() {
