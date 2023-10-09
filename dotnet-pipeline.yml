@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+  paths:
+    include:
+      - WebApp/Backend/AlexaIOTInfraredRemoteAPI
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet build WebApp/Backend/AlexaIOTInfraredRemoteAPI
+  displayName: 'dotnet restore and build'
