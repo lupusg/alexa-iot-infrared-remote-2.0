@@ -30,3 +30,10 @@ steps:
     cd WebApp/Frontend/AlexaIOTInfraredRemoteUI
     ng build
   displayName: 'build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'WebApp/Frontend/AlexaIOTInfraredRemoteUI/dist/alexa-iotinfrared-remote-ui'
+    ArtifactName: 'angular-app'
+    publishLocation: 'Container'
+
