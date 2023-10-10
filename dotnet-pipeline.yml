@@ -14,8 +14,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build WebApp/Backend/AlexaIOTInfraredRemoteAPI
-  displayName: 'dotnet restore and build'
+# - script: dotnet build WebApp/Backend/AlexaIOTInfraredRemoteAPI
+#   displayName: 'dotnet restore and build'
+
+- task: DotNetCoreCLI@2
+  displayName: build
+  inputs:
+    command: 'build'
+    workingDirectory: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI'
+
+- task: DotNetCoreCLI@2
+  displayName: publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI/**/*.csproj'
+    arguments: '--configuration Release -o $(Build.ArtifactStagingDirectory)'
+    workingDirectory: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI'
 
 - task: PublishBuildArtifacts@1
   inputs:
