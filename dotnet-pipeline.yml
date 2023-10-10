@@ -16,3 +16,9 @@ variables:
 steps:
 - script: dotnet build WebApp/Backend/AlexaIOTInfraredRemoteAPI
   displayName: 'dotnet restore and build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dotnet-app'
+    publishLocation: 'Container'
