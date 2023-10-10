@@ -15,6 +15,10 @@ import {
 
 import { environment } from 'src/environments/environment.development';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +43,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
       },
     }),
     ButtonModule,
+    SharedModule,
+    CoreModule,
+    AdminModule,
+    UserModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

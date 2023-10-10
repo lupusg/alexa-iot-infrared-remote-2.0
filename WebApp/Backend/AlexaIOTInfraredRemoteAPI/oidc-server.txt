@@ -7810,3 +7810,48 @@ WHERE [o].[Id] = @__key_0
   "email": "lupusvlad@gmail.com"
 }.
 2023-10-04 19:46:25.132 +03:00 [INF] Request finished HTTP/1.1 POST https://localhost:44395/connect/introspect application/x-www-form-urlencoded 2103 - 200 511 application/json;charset=UTF-8 74.0638ms
+2023-10-10 10:59:30.828 +03:00 [INF] User profile is available. Using 'C:\Users\lupus\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-10 10:59:30.916 +03:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-10-10 10:59:30.917 +03:00 [INF] Quartz Scheduler created
+2023-10-10 10:59:30.918 +03:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-10-10 10:59:30.918 +03:00 [INF] RAMJobStore initialized.
+2023-10-10 10:59:30.919 +03:00 [INF] Quartz Scheduler 3.7.0.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized
+2023-10-10 10:59:30.919 +03:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-10-10 10:59:30.919 +03:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-10-10 10:59:30.927 +03:00 [INF] Adding 1 jobs, 1 triggers.
+2023-10-10 10:59:30.929 +03:00 [INF] Adding job: OpenIddict/Quartz.NET integration.OpenIddict job
+2023-10-10 10:59:33.433 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2023-10-10 10:59:33.492 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2023-10-10 10:59:33.722 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-10 10:59:33.789 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-10 10:59:33.820 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ConcurrencyToken], [o].[Description], [o].[Descriptions], [o].[DisplayName], [o].[DisplayNames], [o].[Name], [o].[Properties], [o].[Resources]
+FROM [OpenIddictScopes] AS [o]
+WHERE [o].[Name] = @__name_0
+2023-10-10 10:59:34.333 +03:00 [INF] Now listening on: http://localhost:5000
+2023-10-10 10:59:34.333 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-10 10:59:34.334 +03:00 [INF] Hosting environment: Production
+2023-10-10 10:59:34.335 +03:00 [INF] Content root path: C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\publish
+2023-10-10 10:59:34.337 +03:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.

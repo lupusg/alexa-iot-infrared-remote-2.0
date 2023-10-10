@@ -123,8 +123,8 @@ public class Startup
 
                 options.RegisterScopes(Scopes.Email, Scopes.Profile, Scopes.Roles, "dataAIIR");
 
-                options.AddDevelopmentEncryptionCertificate()
-                       .AddDevelopmentSigningCertificate();
+                options.AddEphemeralEncryptionKey()
+                       .AddEphemeralSigningKey();
 
                 options.UseAspNetCore()
                        .EnableAuthorizationEndpointPassthrough()

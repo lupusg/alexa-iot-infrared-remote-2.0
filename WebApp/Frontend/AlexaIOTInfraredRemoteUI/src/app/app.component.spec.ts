@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule, StsConfigLoader } from 'angular-auth-oidc-client';
 import { AppComponent } from './app.component';
+import { ButtonModule } from 'primeng/button';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -10,7 +11,7 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule, AuthModule],
+      imports: [RouterTestingModule, HttpClientModule, AuthModule, ButtonModule],
       declarations: [AppComponent],
       providers: [StsConfigLoader],
     });
