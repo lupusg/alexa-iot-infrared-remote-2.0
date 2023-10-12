@@ -7855,3 +7855,329 @@ WHERE [o].[Name] = @__name_0
 2023-10-10 10:59:34.334 +03:00 [INF] Hosting environment: Production
 2023-10-10 10:59:34.335 +03:00 [INF] Content root path: C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\publish
 2023-10-10 10:59:34.337 +03:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2023-10-12 10:59:10.836 +03:00 [INF] User profile is available. Using 'C:\Users\lupus\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-12 10:59:10.979 +03:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-10-12 10:59:10.979 +03:00 [INF] Quartz Scheduler created
+2023-10-12 10:59:10.980 +03:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-10-12 10:59:10.980 +03:00 [INF] RAMJobStore initialized.
+2023-10-12 10:59:10.981 +03:00 [INF] Quartz Scheduler 3.7.0.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized
+2023-10-12 10:59:10.981 +03:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-10-12 10:59:10.982 +03:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-10-12 10:59:10.991 +03:00 [INF] Adding 1 jobs, 1 triggers.
+2023-10-12 10:59:10.993 +03:00 [INF] Adding job: OpenIddict/Quartz.NET integration.OpenIddict job
+2023-10-12 10:59:12.917 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2023-10-12 10:59:12.978 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2023-10-12 10:59:13.273 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-12 10:59:13.350 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-12 10:59:13.368 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ConcurrencyToken], [o].[Description], [o].[Descriptions], [o].[DisplayName], [o].[DisplayNames], [o].[Name], [o].[Properties], [o].[Resources]
+FROM [OpenIddictScopes] AS [o]
+WHERE [o].[Name] = @__name_0
+2023-10-12 10:59:14.067 +03:00 [INF] Now listening on: https://localhost:44395
+2023-10-12 10:59:14.067 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-12 10:59:14.068 +03:00 [INF] Hosting environment: Development
+2023-10-12 10:59:14.068 +03:00 [INF] Content root path: C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer
+2023-10-12 10:59:14.072 +03:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2023-10-12 10:59:14.880 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/ - -
+2023-10-12 10:59:15.186 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-12 10:59:15.196 +03:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-12 10:59:25.589 +03:00 [INF] Executing ViewResult, running view Index.
+2023-10-12 10:59:26.712 +03:00 [INF] Executed ViewResult - view Index executed in 11504.0636ms.
+2023-10-12 10:59:26.717 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer) in 11519.5394ms
+2023-10-12 10:59:26.718 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-12 10:59:26.783 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/ - - - 200 - text/html;+charset=utf-8 11904.1082ms
+2023-10-12 10:59:27.026 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-10-12 10:59:27.026 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/css/site.css - -
+2023-10-12 10:59:27.026 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - -
+2023-10-12 10:59:27.026 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/lib/jquery/dist/jquery.min.js - -
+2023-10-12 10:59:27.027 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2023-10-12 10:59:27.027 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2023-10-12 10:59:27.037 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_vs/browserLink - -
+2023-10-12 10:59:27.052 +03:00 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2023-10-12 10:59:27.052 +03:00 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2023-10-12 10:59:27.052 +03:00 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2023-10-12 10:59:27.052 +03:00 [INF] The file /css/site.css was not modified
+2023-10-12 10:59:27.052 +03:00 [INF] The file /js/site.js was not modified
+2023-10-12 10:59:27.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/css/site.css - - - 304 - text/css 28.4217ms
+2023-10-12 10:59:27.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/css/bootstrap.min.css - - - 304 - text/css 28.3772ms
+2023-10-12 10:59:27.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 304 - text/javascript 26.9294ms
+2023-10-12 10:59:27.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/lib/jquery/dist/jquery.min.js - - - 304 - text/javascript 28.4053ms
+2023-10-12 10:59:27.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 304 - text/javascript 27.8459ms
+2023-10-12 10:59:27.059 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 33.3890ms
+2023-10-12 10:59:27.083 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 45.5040ms
+2023-10-12 11:06:11.123 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__p_1='?' (DbType = Int32), @__date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_1) [o].[Id], [o].[ApplicationId], [o].[AuthorizationId], [o].[ConcurrencyToken], [o].[CreationDate], [o].[ExpirationDate], [o].[Payload], [o].[Properties], [o].[RedemptionDate], [o].[ReferenceId], [o].[Status], [o].[Subject], [o].[Type]
+FROM [OpenIddictTokens] AS [o]
+LEFT JOIN [OpenIddictAuthorizations] AS [o0] ON [o].[AuthorizationId] = [o0].[Id]
+WHERE [o].[CreationDate] < @__date_0 AND ([o].[Status] NOT IN (N'inactive', N'valid') OR ([o].[Status] IS NULL) OR (([o0].[Id] IS NOT NULL) AND ([o0].[Status] <> N'valid' OR ([o0].[Status] IS NULL))) OR [o].[ExpirationDate] < GETUTCDATE())
+ORDER BY [o].[Id]
+2023-10-12 11:06:11.209 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__p_1='?' (DbType = Int32), @__date_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ApplicationId], [t].[ConcurrencyToken], [t].[CreationDate], [t].[Properties], [t].[Scopes], [t].[Status], [t].[Subject], [t].[Type], [o1].[Id], [o1].[ApplicationId], [o1].[AuthorizationId], [o1].[ConcurrencyToken], [o1].[CreationDate], [o1].[ExpirationDate], [o1].[Payload], [o1].[Properties], [o1].[RedemptionDate], [o1].[ReferenceId], [o1].[Status], [o1].[Subject], [o1].[Type]
+FROM (
+    SELECT TOP(@__p_1) [o].[Id], [o].[ApplicationId], [o].[ConcurrencyToken], [o].[CreationDate], [o].[Properties], [o].[Scopes], [o].[Status], [o].[Subject], [o].[Type]
+    FROM [OpenIddictAuthorizations] AS [o]
+    WHERE [o].[CreationDate] < @__date_0 AND ([o].[Status] <> N'valid' OR ([o].[Status] IS NULL) OR ([o].[Type] = N'ad-hoc' AND NOT (EXISTS (
+        SELECT 1
+        FROM [OpenIddictTokens] AS [o0]
+        WHERE [o].[Id] = [o0].[AuthorizationId]))))
+    ORDER BY [o].[Id]
+) AS [t]
+LEFT JOIN [OpenIddictTokens] AS [o1] ON [t].[Id] = [o1].[AuthorizationId]
+ORDER BY [t].[Id]
+2023-10-12 11:39:13.497 +03:00 [INF] User profile is available. Using 'C:\Users\lupus\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-10-12 11:39:13.745 +03:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-10-12 11:39:13.746 +03:00 [INF] Quartz Scheduler created
+2023-10-12 11:39:13.746 +03:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-10-12 11:39:13.747 +03:00 [INF] RAMJobStore initialized.
+2023-10-12 11:39:13.747 +03:00 [INF] Quartz Scheduler 3.7.0.0 - 'QuartzScheduler' with instanceId 'NON_CLUSTERED' initialized
+2023-10-12 11:39:13.748 +03:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-10-12 11:39:13.748 +03:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-10-12 11:39:13.757 +03:00 [INF] Adding 1 jobs, 1 triggers.
+2023-10-12 11:39:13.759 +03:00 [INF] Adding job: OpenIddict/Quartz.NET integration.OpenIddict job
+2023-10-12 11:39:15.160 +03:00 [INF] Executed DbCommand (193ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [aiir-development-db];
+2023-10-12 11:39:15.219 +03:00 [INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [aiir-development-db] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2023-10-12 11:39:15.244 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2023-10-12 11:39:15.354 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoles] (
+    [Id] nvarchar(450) NOT NULL,
+    [Name] nvarchar(256) NULL,
+    [NormalizedName] nvarchar(256) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
+);
+2023-10-12 11:39:15.357 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUsers] (
+    [Id] nvarchar(450) NOT NULL,
+    [UserName] nvarchar(256) NULL,
+    [NormalizedUserName] nvarchar(256) NULL,
+    [Email] nvarchar(256) NULL,
+    [NormalizedEmail] nvarchar(256) NULL,
+    [EmailConfirmed] bit NOT NULL,
+    [PasswordHash] nvarchar(max) NULL,
+    [SecurityStamp] nvarchar(max) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    [PhoneNumber] nvarchar(max) NULL,
+    [PhoneNumberConfirmed] bit NOT NULL,
+    [TwoFactorEnabled] bit NOT NULL,
+    [LockoutEnd] datetimeoffset NULL,
+    [LockoutEnabled] bit NOT NULL,
+    [AccessFailedCount] int NOT NULL,
+    CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
+);
+2023-10-12 11:39:15.360 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [OpenIddictApplications] (
+    [Id] nvarchar(450) NOT NULL,
+    [ClientId] nvarchar(100) NULL,
+    [ClientSecret] nvarchar(max) NULL,
+    [ConcurrencyToken] nvarchar(50) NULL,
+    [ConsentType] nvarchar(50) NULL,
+    [DisplayName] nvarchar(max) NULL,
+    [DisplayNames] nvarchar(max) NULL,
+    [Permissions] nvarchar(max) NULL,
+    [PostLogoutRedirectUris] nvarchar(max) NULL,
+    [Properties] nvarchar(max) NULL,
+    [RedirectUris] nvarchar(max) NULL,
+    [Requirements] nvarchar(max) NULL,
+    [Type] nvarchar(50) NULL,
+    CONSTRAINT [PK_OpenIddictApplications] PRIMARY KEY ([Id])
+);
+2023-10-12 11:39:15.363 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [OpenIddictScopes] (
+    [Id] nvarchar(450) NOT NULL,
+    [ConcurrencyToken] nvarchar(50) NULL,
+    [Description] nvarchar(max) NULL,
+    [Descriptions] nvarchar(max) NULL,
+    [DisplayName] nvarchar(max) NULL,
+    [DisplayNames] nvarchar(max) NULL,
+    [Name] nvarchar(200) NULL,
+    [Properties] nvarchar(max) NULL,
+    [Resources] nvarchar(max) NULL,
+    CONSTRAINT [PK_OpenIddictScopes] PRIMARY KEY ([Id])
+);
+2023-10-12 11:39:15.365 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoleClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [RoleId] nvarchar(450) NOT NULL,
+    [ClaimType] nvarchar(max) NULL,
+    [ClaimValue] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoleClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE
+);
+2023-10-12 11:39:15.367 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserClaims] (
+    [Id] int NOT NULL IDENTITY,
+    [UserId] nvarchar(450) NOT NULL,
+    [ClaimType] nvarchar(max) NULL,
+    [ClaimValue] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetUserClaims] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2023-10-12 11:39:15.370 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserLogins] (
+    [LoginProvider] nvarchar(450) NOT NULL,
+    [ProviderKey] nvarchar(450) NOT NULL,
+    [ProviderDisplayName] nvarchar(max) NULL,
+    [UserId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_AspNetUserLogins] PRIMARY KEY ([LoginProvider], [ProviderKey]),
+    CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2023-10-12 11:39:15.373 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserRoles] (
+    [UserId] nvarchar(450) NOT NULL,
+    [RoleId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_AspNetUserRoles] PRIMARY KEY ([UserId], [RoleId]),
+    CONSTRAINT [FK_AspNetUserRoles_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2023-10-12 11:39:15.375 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetUserTokens] (
+    [UserId] nvarchar(450) NOT NULL,
+    [LoginProvider] nvarchar(450) NOT NULL,
+    [Name] nvarchar(450) NOT NULL,
+    [Value] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetUserTokens] PRIMARY KEY ([UserId], [LoginProvider], [Name]),
+    CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+2023-10-12 11:39:15.377 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [OpenIddictAuthorizations] (
+    [Id] nvarchar(450) NOT NULL,
+    [ApplicationId] nvarchar(450) NULL,
+    [ConcurrencyToken] nvarchar(50) NULL,
+    [CreationDate] datetime2 NULL,
+    [Properties] nvarchar(max) NULL,
+    [Scopes] nvarchar(max) NULL,
+    [Status] nvarchar(50) NULL,
+    [Subject] nvarchar(400) NULL,
+    [Type] nvarchar(50) NULL,
+    CONSTRAINT [PK_OpenIddictAuthorizations] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_OpenIddictAuthorizations_OpenIddictApplications_ApplicationId] FOREIGN KEY ([ApplicationId]) REFERENCES [OpenIddictApplications] ([Id])
+);
+2023-10-12 11:39:15.380 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [OpenIddictTokens] (
+    [Id] nvarchar(450) NOT NULL,
+    [ApplicationId] nvarchar(450) NULL,
+    [AuthorizationId] nvarchar(450) NULL,
+    [ConcurrencyToken] nvarchar(50) NULL,
+    [CreationDate] datetime2 NULL,
+    [ExpirationDate] datetime2 NULL,
+    [Payload] nvarchar(max) NULL,
+    [Properties] nvarchar(max) NULL,
+    [RedemptionDate] datetime2 NULL,
+    [ReferenceId] nvarchar(100) NULL,
+    [Status] nvarchar(50) NULL,
+    [Subject] nvarchar(400) NULL,
+    [Type] nvarchar(50) NULL,
+    CONSTRAINT [PK_OpenIddictTokens] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_OpenIddictTokens_OpenIddictApplications_ApplicationId] FOREIGN KEY ([ApplicationId]) REFERENCES [OpenIddictApplications] ([Id]),
+    CONSTRAINT [FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId] FOREIGN KEY ([AuthorizationId]) REFERENCES [OpenIddictAuthorizations] ([Id])
+);
+2023-10-12 11:39:15.383 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
+2023-10-12 11:39:15.384 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
+2023-10-12 11:39:15.385 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
+2023-10-12 11:39:15.386 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
+2023-10-12 11:39:15.387 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
+2023-10-12 11:39:15.388 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
+2023-10-12 11:39:15.389 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
+2023-10-12 11:39:15.390 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_OpenIddictApplications_ClientId] ON [OpenIddictApplications] ([ClientId]) WHERE [ClientId] IS NOT NULL;
+2023-10-12 11:39:15.391 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_OpenIddictAuthorizations_ApplicationId_Status_Subject_Type] ON [OpenIddictAuthorizations] ([ApplicationId], [Status], [Subject], [Type]);
+2023-10-12 11:39:15.392 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_OpenIddictScopes_Name] ON [OpenIddictScopes] ([Name]) WHERE [Name] IS NOT NULL;
+2023-10-12 11:39:15.393 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_OpenIddictTokens_ApplicationId_Status_Subject_Type] ON [OpenIddictTokens] ([ApplicationId], [Status], [Subject], [Type]);
+2023-10-12 11:39:15.394 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_OpenIddictTokens_AuthorizationId] ON [OpenIddictTokens] ([AuthorizationId]);
+2023-10-12 11:39:15.395 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_OpenIddictTokens_ReferenceId] ON [OpenIddictTokens] ([ReferenceId]) WHERE [ReferenceId] IS NOT NULL;
+2023-10-12 11:39:15.699 +03:00 [INF] Executed DbCommand (40ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-12 11:39:15.757 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-12 11:39:15.895 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 100), @p2='?' (Size = 4000), @p3='?' (Size = 50), @p4='?' (Size = 50), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OpenIddictApplications] ([Id], [ClientId], [ClientSecret], [ConcurrencyToken], [ConsentType], [DisplayName], [DisplayNames], [Permissions], [PostLogoutRedirectUris], [Properties], [RedirectUris], [Requirements], [Type])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2023-10-12 11:39:15.921 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-12 11:39:15.935 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__identifier_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ClientId], [o].[ClientSecret], [o].[ConcurrencyToken], [o].[ConsentType], [o].[DisplayName], [o].[DisplayNames], [o].[Permissions], [o].[PostLogoutRedirectUris], [o].[Properties], [o].[RedirectUris], [o].[Requirements], [o].[Type]
+FROM [OpenIddictApplications] AS [o]
+WHERE [o].[ClientId] = @__identifier_0
+2023-10-12 11:39:15.939 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 100), @p2='?' (Size = 4000), @p3='?' (Size = 50), @p4='?' (Size = 50), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OpenIddictApplications] ([Id], [ClientId], [ClientSecret], [ConcurrencyToken], [ConsentType], [DisplayName], [DisplayNames], [Permissions], [PostLogoutRedirectUris], [Properties], [RedirectUris], [Requirements], [Type])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2023-10-12 11:39:15.957 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__name_0='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ConcurrencyToken], [o].[Description], [o].[Descriptions], [o].[DisplayName], [o].[DisplayNames], [o].[Name], [o].[Properties], [o].[Resources]
+FROM [OpenIddictScopes] AS [o]
+WHERE [o].[Name] = @__name_0
+2023-10-12 11:39:15.978 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?' (Size = 200)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[Id], [o].[ConcurrencyToken], [o].[Description], [o].[Descriptions], [o].[DisplayName], [o].[DisplayNames], [o].[Name], [o].[Properties], [o].[Resources]
+FROM [OpenIddictScopes] AS [o]
+WHERE [o].[Name] = @__name_0
+2023-10-12 11:39:16.000 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 50), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 200), @p7='?' (Size = 4000), @p8='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [OpenIddictScopes] ([Id], [ConcurrencyToken], [Description], [Descriptions], [DisplayName], [DisplayNames], [Name], [Properties], [Resources])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2023-10-12 11:39:16.757 +03:00 [INF] Now listening on: https://localhost:44395
+2023-10-12 11:39:16.758 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-10-12 11:39:16.759 +03:00 [INF] Hosting environment: Development
+2023-10-12 11:39:16.762 +03:00 [INF] Content root path: C:\Developing\alexa-iot-infrared-remote-2.0\WebApp\Backend\AlexaIOTInfraredRemoteAPI\OpeniddictServer
+2023-10-12 11:39:16.767 +03:00 [INF] Scheduler QuartzScheduler_$_NON_CLUSTERED started.
+2023-10-12 11:39:17.681 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/ - -
+2023-10-12 11:39:18.062 +03:00 [INF] Executing endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-12 11:39:18.072 +03:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller OpeniddictServer.Controllers.HomeController (OpeniddictServer).
+2023-10-12 11:39:28.543 +03:00 [INF] Executing ViewResult, running view Index.
+2023-10-12 11:39:29.717 +03:00 [INF] Executed ViewResult - view Index executed in 11635.9393ms.
+2023-10-12 11:39:29.723 +03:00 [INF] Executed action OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer) in 11650.017ms
+2023-10-12 11:39:29.724 +03:00 [INF] Executed endpoint 'OpeniddictServer.Controllers.HomeController.Index (OpeniddictServer)'
+2023-10-12 11:39:29.745 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/ - - - 200 - text/html;+charset=utf-8 12065.7521ms
+2023-10-12 11:39:30.109 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - -
+2023-10-12 11:39:30.116 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44395/_vs/browserLink - -
+2023-10-12 11:39:30.162 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 53.0130ms
+2023-10-12 11:39:30.174 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44395/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 57.3640ms
