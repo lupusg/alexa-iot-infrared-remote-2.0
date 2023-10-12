@@ -32,7 +32,7 @@ import { UserModule } from './user/user.module';
         authority: environment.authServerUrl,
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
-        clientId: 'aiirui',
+        clientId: environment.oidcClientId,
         scope: 'openid profile roles email dataAIIR offline_access',
         responseType: 'code',
         silentRenew: true,

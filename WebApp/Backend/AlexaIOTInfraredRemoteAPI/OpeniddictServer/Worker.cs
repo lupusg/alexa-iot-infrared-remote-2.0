@@ -40,11 +40,13 @@ namespace OpeniddictServer
                         },
                         PostLogoutRedirectUris =
                         {
-                            new Uri("https://localhost:4200")
+                            new Uri("https://localhost:4200"),
+                            new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net")
                         },
                         RedirectUris =
                         {
-                            new Uri("https://localhost:4200")
+                            new Uri("https://localhost:4200"),
+                            new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net")
                         },
                         Permissions =
                         {

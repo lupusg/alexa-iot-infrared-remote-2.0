@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 import { PrimeNGConfig } from 'primeng/api';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,7 @@ export class AppComponent implements OnInit {
   constructor(
     private oidcSecurityService: OidcSecurityService,
     private primengConfig: PrimeNGConfig,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -27,7 +30,9 @@ export class AppComponent implements OnInit {
       .subscribe((loginResponse: LoginResponse) => {
         const { isAuthenticated, userData, accessToken, idToken, configId } =
           loginResponse;
-
+        if (isAuthenticated) {
+          this.http.get(environment.apiUrl + '/api/weatherforecast').subscribe(val => console.log(val));
+        }
         /*...*/
       });
   }

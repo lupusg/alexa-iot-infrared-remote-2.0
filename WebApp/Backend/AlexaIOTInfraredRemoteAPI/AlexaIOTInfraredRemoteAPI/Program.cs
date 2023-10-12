@@ -1,5 +1,6 @@
 using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
 
@@ -20,7 +21,7 @@ builder.Services.AddCors(options =>
             builder
                 .AllowCredentials()
                 .WithOrigins(
-                    "https://localhost:4200")
+                    "https://localhost:4200", "https://aiir-web2.azurewebsites.net/")
                 .SetIsOriginAllowedToAllowWildcardSubdomains()
                 .AllowAnyHeader()
                 .AllowAnyMethod();
@@ -43,7 +44,7 @@ builder.Services.AddOpenIddict()
     {
         // Note: the validation handler uses OpenID Connect discovery
         // to retrieve the address of the introspection endpoint.
-        options.SetIssuer("https://localhost:44395/");
+        options.SetIssuer(builder.Configuration["Openiddict:Issuer"]);
         options.AddAudiences("rs_dataAIIR");
 
         // Configure the validation handler to use introspection and register the client
