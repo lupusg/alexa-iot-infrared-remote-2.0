@@ -1,0 +1,32 @@
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+      
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js 18.x'
+
+- script: |
+    cd WebApp/Frontend/AlexaIOTInfraredRemoteUI
+    npm install -g @angular/cli
+    npm ci
+  displayName: 'install'
+
+- script: |
+    cd WebApp/Frontend/AlexaIOTInfraredRemoteUI
+    ng build
+  displayName: 'build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'WebApp/Frontend/AlexaIOTInfraredRemoteUI/dist/alexa-iotinfrared-remote-ui'
+    ArtifactName: 'angular-app'
+    publishLocation: 'Container'
+

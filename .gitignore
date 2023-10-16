@@ -360,3 +360,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/WebApp/Backend/AlexaIOTInfraredRemoteAPI/OpeniddictServer/oidc-server.txt

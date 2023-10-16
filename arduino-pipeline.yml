@@ -1,0 +1,25 @@
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+  
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+    architecture: 'x64'
+
+- script: |
+    cd Arduino/nodemcu-alexa-iot-infrared-remote
+    pip install --upgrade platformio
+  displayName: Install Platform.io
+
+- script: |
+    cd Arduino/nodemcu-alexa-iot-infrared-remote
+    pio run
+  displayName: 'Build'

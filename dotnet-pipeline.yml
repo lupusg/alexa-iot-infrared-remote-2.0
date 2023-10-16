@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: build
+  inputs:
+    command: 'build'
+    workingDirectory: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI'
+
+- task: DotNetCoreCLI@2
+  displayName: publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI/**/*.csproj'
+    arguments: '--configuration Release -o $(Build.ArtifactStagingDirectory)'
+    workingDirectory: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dotnet-app'
+    publishLocation: 'Container'
