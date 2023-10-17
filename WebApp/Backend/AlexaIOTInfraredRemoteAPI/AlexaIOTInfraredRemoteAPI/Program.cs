@@ -1,17 +1,24 @@
+using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AIIRDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 builder.Services.AddCors(options =>
 {
@@ -44,7 +51,7 @@ builder.Services.AddOpenIddict()
     {
         // Note: the validation handler uses OpenID Connect discovery
         // to retrieve the address of the introspection endpoint.
-        options.SetIssuer(builder.Configuration["Openiddict:Issuer"]);
+        options.SetIssuer(builder.Configuration["Openiddict:Issuer"] ?? throw new ArgumentException("Issuer is null."));
         options.AddAudiences("rs_dataAIIR");
 
         // Configure the validation handler to use introspection and register the client
