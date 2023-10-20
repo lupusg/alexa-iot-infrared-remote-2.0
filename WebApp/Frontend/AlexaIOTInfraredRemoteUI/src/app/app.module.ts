@@ -17,8 +17,16 @@ import { environment } from 'src/environments/environment.development';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { AdminModule } from './admin/admin.module';
-import { UserModule } from './user/user.module';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { SidebarModule } from 'primeng/sidebar';
+import { BadgeModule } from 'primeng/badge';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { RippleModule } from 'primeng/ripple';
+import { RouterModule } from '@angular/router';
+import { AppConfigModule } from './core/components/config/config.module';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,11 +50,19 @@ import { UserModule } from './user/user.module';
         secureRoutes: [environment.apiUrl],
       },
     }),
+    DashboardModule,
     ButtonModule,
     SharedModule,
     CoreModule,
-    AdminModule,
-    UserModule,
+    FormsModule,
+    InputTextModule,
+    SidebarModule,
+    BadgeModule,
+    RadioButtonModule,
+    InputSwitchModule,
+    RippleModule,
+    RouterModule,
+    AppConfigModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
