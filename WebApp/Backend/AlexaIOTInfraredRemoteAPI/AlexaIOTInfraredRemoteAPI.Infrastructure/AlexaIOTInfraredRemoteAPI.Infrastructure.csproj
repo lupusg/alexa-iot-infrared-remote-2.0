@@ -14,7 +14,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="Helpers\" />
     <Folder Include="Mapper\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

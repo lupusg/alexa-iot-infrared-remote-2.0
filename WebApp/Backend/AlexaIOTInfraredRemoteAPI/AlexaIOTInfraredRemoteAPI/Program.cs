@@ -1,3 +1,4 @@
+using AlexaIOTInfraredRemoteAPI.Extensions;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
