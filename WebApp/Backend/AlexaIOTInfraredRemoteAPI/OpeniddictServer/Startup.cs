@@ -81,7 +81,7 @@ public class Startup
                     builder
                         .AllowCredentials()
                         .WithOrigins(
-                            "https://localhost:4200", "https://localhost:4204", "https://yellow-stone-0df16c003.3.azurestaticapps.net/")
+                            "https://localhost:4200", "https://localhost:4204", "https://yellow-stone-0df16c003.3.azurestaticapps.net/", "https://localhost:5001")
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
