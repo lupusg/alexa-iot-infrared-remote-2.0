@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
-    [DbContext(typeof(AIIRDbContext))]
+    [DbContext(typeof(AiirContext))]
     partial class AIIRDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

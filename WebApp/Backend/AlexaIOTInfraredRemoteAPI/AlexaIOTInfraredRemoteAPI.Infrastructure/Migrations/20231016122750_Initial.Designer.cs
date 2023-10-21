@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
-    [DbContext(typeof(AIIRDbContext))]
+    [DbContext(typeof(AiirContext))]
     [Migration("20231016122750_Initial")]
     partial class Initial
     {

@@ -2,9 +2,9 @@
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Database
 {
-    public class AIIRDbContext : DbContext
+    public class AiirContext : DbContext
     {
-        public AIIRDbContext(DbContextOptions<AIIRDbContext> options) : base(options)
+        public AiirContext(DbContextOptions<AiirContext> options) : base(options)
         {
 
         }

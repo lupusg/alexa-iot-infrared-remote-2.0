@@ -93,8 +93,8 @@ public class Startup
 
         services.AddAuthentication().AddGoogle(googleOptions =>
         {
-            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"] ?? throw new Exception("Google client id is null.");
+            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"] ?? throw new Exception("Google client  is null."); ;
         });
 
         services.AddOpenIddict()
@@ -178,5 +178,24 @@ public class Startup
             endpoints.MapDefaultControllerRoute();
             endpoints.MapRazorPages();
         });
+
+        SeedData(app);
+    }
+
+    public static async void SeedData(IApplicationBuilder app)
+    {
+        using var scope = app.ApplicationServices.CreateScope();
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        var logger = services.GetRequiredService<ILogger<Program>>();
+
+        try
+        {
+            await context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while migrating or seeding the identity database.");
+        }
     }
 }
