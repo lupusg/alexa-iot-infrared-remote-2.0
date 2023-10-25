@@ -17,7 +17,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI/**/*.csproj'
-    arguments: '--configuration Release -o $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration --no-restore Release -o $(Build.ArtifactStagingDirectory)'
     workingDirectory: 'WebApp/Backend/AlexaIOTInfraredRemoteAPI'
 
 - task: PublishBuildArtifacts@1
