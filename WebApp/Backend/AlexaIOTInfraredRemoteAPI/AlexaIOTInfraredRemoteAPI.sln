@@ -7,6 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlexaIOTInfraredRemoteAPI",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpeniddictServer", "OpeniddictServer\OpeniddictServer.csproj", "{461BCAD1-F243-48BA-B05F-C5497B4318B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexaIOTInfraredRemoteAPI.Domain", "AlexaIOTInfraredRemoteAPI.Domain\AlexaIOTInfraredRemoteAPI.Domain.csproj", "{F69D4255-3619-42F4-8952-431E5EEA26D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexaIOTInfraredRemoteAPI.Application", "AlexaIOTInfraredRemoteAPI.Application\AlexaIOTInfraredRemoteAPI.Application.csproj", "{9F8F1233-4A42-4AFC-B026-2450F9158412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexaIOTInfraredRemoteAPI.Infrastructure", "AlexaIOTInfraredRemoteAPI.Infrastructure\AlexaIOTInfraredRemoteAPI.Infrastructure.csproj", "{2666DCFC-91A8-4F7C-AC78-F75E12EC371A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexaIOTInfraredRemoteAPI.Tests", "AlexaIOTInfraredRemoteAPI.Tests\AlexaIOTInfraredRemoteAPI.Tests.csproj", "{811D9E4C-0FA9-450A-A8B6-E99C08C842BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +29,22 @@ Global
 		{461BCAD1-F243-48BA-B05F-C5497B4318B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{461BCAD1-F243-48BA-B05F-C5497B4318B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{461BCAD1-F243-48BA-B05F-C5497B4318B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F69D4255-3619-42F4-8952-431E5EEA26D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F69D4255-3619-42F4-8952-431E5EEA26D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F69D4255-3619-42F4-8952-431E5EEA26D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F69D4255-3619-42F4-8952-431E5EEA26D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F8F1233-4A42-4AFC-B026-2450F9158412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F8F1233-4A42-4AFC-B026-2450F9158412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F8F1233-4A42-4AFC-B026-2450F9158412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F8F1233-4A42-4AFC-B026-2450F9158412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2666DCFC-91A8-4F7C-AC78-F75E12EC371A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2666DCFC-91A8-4F7C-AC78-F75E12EC371A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2666DCFC-91A8-4F7C-AC78-F75E12EC371A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2666DCFC-91A8-4F7C-AC78-F75E12EC371A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811D9E4C-0FA9-450A-A8B6-E99C08C842BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811D9E4C-0FA9-450A-A8B6-E99C08C842BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811D9E4C-0FA9-450A-A8B6-E99C08C842BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811D9E4C-0FA9-450A-A8B6-E99C08C842BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

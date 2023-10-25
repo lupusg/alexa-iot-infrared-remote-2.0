@@ -1,4 +1,14 @@
-<div class="card flex flex-wrap gap-3 justify-content-center">
-  <p-button label="loginn" (click)="login()"></p-button>
-  <p-button label="logout" (click)="logout()"></p-button>
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-topbar></app-topbar>
+  <div class="layout-sidebar">
+      <app-sidebar></app-sidebar>
+  </div>
+  <div class="layout-main-container">
+      <div class="layout-main">
+          <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+  </div>
+  <app-config></app-config>
+  <div class="layout-mask"></div>
 </div>

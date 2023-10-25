@@ -81,7 +81,7 @@ public class Startup
                     builder
                         .AllowCredentials()
                         .WithOrigins(
-                            "https://localhost:4200", "https://localhost:4204", "https://yellow-stone-0df16c003.3.azurestaticapps.net/")
+                            "https://localhost:4200", "https://localhost:4204", "https://yellow-stone-0df16c003.3.azurestaticapps.net/", "https://localhost:5001")
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -93,8 +93,8 @@ public class Startup
 
         services.AddAuthentication().AddGoogle(googleOptions =>
         {
-            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"] ?? throw new Exception("Google client id is null.");
+            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"] ?? throw new Exception("Google client  is null."); ;
         });
 
         services.AddOpenIddict()
@@ -178,5 +178,34 @@ public class Startup
             endpoints.MapDefaultControllerRoute();
             endpoints.MapRazorPages();
         });
+
+        SeedData(app);
+    }
+
+    public static async void SeedData(IApplicationBuilder app)
+    {
+        using var scope = app.ApplicationServices.CreateScope();
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var roles = new[] { "Admin", "User" };
+
+        foreach (var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
+
+        try
+        {
+            await context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while migrating or seeding the identity database.");
+        }
     }
 }

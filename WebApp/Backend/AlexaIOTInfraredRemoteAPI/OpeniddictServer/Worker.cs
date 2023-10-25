@@ -69,6 +69,47 @@ namespace OpeniddictServer
                     });
                 }
 
+                //swagger
+                if (await manager.FindByClientIdAsync("swaggerui") is null)
+                {
+                    await manager.CreateAsync(new OpenIddictApplicationDescriptor
+                    {
+                        ClientId = "swaggerui",
+                        ConsentType = ConsentTypes.Explicit,
+                        DisplayName = "Swagger UI",
+                        DisplayNames =
+                        {
+                            [CultureInfo.GetCultureInfo("en-EN")] = "Swagger UI"
+                        },
+                        PostLogoutRedirectUris =
+                        {
+                            new Uri("https://localhost:5001/swagger/oauth2-redirect.html")
+                        },
+                        RedirectUris =
+                        {
+                            new Uri("https://localhost:5001/swagger/oauth2-redirect.html")
+                        },
+                        Permissions =
+                        {
+                            Permissions.Endpoints.Authorization,
+                            Permissions.Endpoints.Logout,
+                            Permissions.Endpoints.Token,
+                            Permissions.Endpoints.Revocation,
+                            Permissions.GrantTypes.AuthorizationCode,
+                            Permissions.GrantTypes.RefreshToken,
+                            Permissions.ResponseTypes.Code,
+                            Permissions.Scopes.Email,
+                            Permissions.Scopes.Profile,
+                            Permissions.Scopes.Roles,
+                            Permissions.Prefixes.Scope + "dataAIIR",
+                        },
+                        Requirements =
+                        {
+                            Requirements.Features.ProofKeyForCodeExchange
+                        }
+                    });
+                }
+
                 // API
                 if (await manager.FindByClientIdAsync("rs_dataAIIR") == null)
                 {
