@@ -122,7 +122,10 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var claims = info.Principal.Claims.ToList();
+                var pictureUrl = claims[5].Value;
+
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PictureUrl = pictureUrl};
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

@@ -107,9 +107,10 @@ export class AppComponent implements OnInit, OnDestroy {
         const { isAuthenticated, userData, accessToken, idToken, configId } =
           loginResponse;
         if (isAuthenticated) {
-          this.http
-            .get(environment.apiUrl + '/api/weatherforecast')
-            .subscribe((val) => console.log(val));
+          // this.http
+          //   .get(environment.apiUrl + '/api/weatherforecast')
+          //   .subscribe((val) => console.log(val));
+          console.log(loginResponse);
         }
         /*...*/
       });
@@ -117,16 +118,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private initPrimeNGConfig() {
     this.primengConfig.ripple = true;
-  }
-
-  login() {
-    this.oidcSecurityService.authorize();
-  }
-
-  logout() {
-    this.oidcSecurityService
-      .logoff()
-      .subscribe((result) => console.log(result));
   }
 
   hideMenu() {
