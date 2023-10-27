@@ -1,4 +1,5 @@
 using AlexaIOTInfraredRemoteAPI.Extensions;
+using AlexaIOTInfraredRemoteAPI.Infrastructure;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
