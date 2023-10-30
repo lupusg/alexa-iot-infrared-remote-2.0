@@ -12,4 +12,10 @@
 // Board settings
 #define BAUD_RATE 115200
 
-#endif // CONFIG_H
+// Infrared receiver settings
+#define RECV_PIN 14
+#define CAPTURE_BUFFER_SIZE 1024
+#define MIN_UNKNOWN_SIZE 12
+#define SAVE_BUFFER false
+
+#endif  // CONFIG_H
