@@ -13,10 +13,6 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button class="p-link layout-topbar-button">
-            <i class="pi pi-calendar"></i>
-            <span>Calendar</span>
-        </button>
         <ng-container *ngIf="userData$ | async as user">
             <button *ngIf="!user.userData" class="p-link layout-topbar-button" (click)="login()">
                 <i class="pi pi-user"></i>

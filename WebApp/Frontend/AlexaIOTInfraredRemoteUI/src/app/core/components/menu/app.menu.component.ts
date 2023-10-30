@@ -15,13 +15,18 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'UI Components',
+                label: 'Home',
                 items: [
                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-                    { label: 'Your Infrared Signals', icon: 'pi pi-fw pi-wifi' },
-                    { label: 'Board Settings', icon: 'pi pi-fw pi-cog' }
-                ]
+                ],
             },
+            {
+                label: 'Infrared Signals Manager',
+                items: [
+                    { label: 'Your Infrared Signals', icon: 'pi pi-fw pi-wifi', routerLink: ['/infrared-signals'] },
+                    { label: 'Board Settings', icon: 'pi pi-fw pi-cog', routerLink: ['/board-settings'] }
+                ]
+            }
         ];
     }
 }
