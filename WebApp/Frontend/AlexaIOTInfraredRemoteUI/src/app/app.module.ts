@@ -27,9 +27,11 @@ import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { AppConfigModule } from './core/components/config/config.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { InfraredSignalsComponent } from './features/infrared-signals/infrared-signals.component';
+import { BoardSettingsComponent } from './features/board-settings/board-settings.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, InfraredSignalsComponent, BoardSettingsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

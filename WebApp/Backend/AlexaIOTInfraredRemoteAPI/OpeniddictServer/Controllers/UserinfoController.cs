@@ -41,7 +41,8 @@ public class UserinfoController : Controller
         var claims = new Dictionary<string, object>(StringComparer.Ordinal)
         {
             // Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
-            [Claims.Subject] = await _userManager.GetUserIdAsync(user)
+            [Claims.Subject] = await _userManager.GetUserIdAsync(user),
+            [Claims.Picture] = user.PictureUrl
         };
 
         if (User.HasScope(Scopes.Email))

@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 using OpeniddictServer.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Microsoft.IdentityModel.Logging;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace OpeniddictServer;
 
@@ -33,9 +36,10 @@ public class Startup
         services.AddDatabaseDeveloperPageExceptionFilter();
 
         services.AddIdentity<ApplicationUser, IdentityRole>()
-          .AddEntityFrameworkStores<ApplicationDbContext>()
-          .AddDefaultTokenProviders()
-          .AddDefaultUI();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddDefaultUI()
+            .AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
 
         services.AddDistributedMemoryCache();
 
@@ -95,6 +99,7 @@ public class Startup
         {
             googleOptions.ClientId = Configuration["Authentication:Google:ClientId"] ?? throw new Exception("Google client id is null.");
             googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"] ?? throw new Exception("Google client  is null."); ;
+            googleOptions.ClaimActions.MapJsonKey("picture", "picture", "url");
         });
 
         services.AddOpenIddict()
@@ -122,6 +127,8 @@ public class Startup
                        .AllowRefreshTokenFlow();
 
                 options.RegisterScopes(Scopes.Email, Scopes.Profile, Scopes.Roles, "dataAIIR");
+
+                options.RegisterClaims(Claims.Picture);
 
                 options.AddEphemeralEncryptionKey()
                        .AddEphemeralSigningKey();
