@@ -14,6 +14,7 @@ class ArduinoIoTCloudConnection {
                             const char *device_key);
   void setup();
   void loop();
+  bool get_ir_receiver_state();
 
  private:
   const char *device_login_name_;
