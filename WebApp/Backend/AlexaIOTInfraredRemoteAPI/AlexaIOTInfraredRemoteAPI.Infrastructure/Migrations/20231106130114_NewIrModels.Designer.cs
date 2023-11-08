@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AiirContext))]
-    [Migration("20231026124803_Initial")]
-    partial class Initial
+    [Migration("20231106130114_NewIrModels")]
+    partial class NewIrModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,10 +31,6 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AssignedButton")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -43,6 +39,10 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InfraredData")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IrSignalOutput")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
