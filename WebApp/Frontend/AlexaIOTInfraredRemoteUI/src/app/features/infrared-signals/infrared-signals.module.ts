@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InfraredSignalsComponent } from './infrared-signals.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InfraredSignalsComponent
+  ],
   imports: [
     CommonModule
   ]

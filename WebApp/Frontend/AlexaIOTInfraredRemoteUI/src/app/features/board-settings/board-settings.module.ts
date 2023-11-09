@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BoardSettingsComponent } from './board-settings.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    BoardSettingsComponent
+  ],
   imports: [
     CommonModule
   ]
