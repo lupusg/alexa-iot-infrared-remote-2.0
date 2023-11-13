@@ -2,7 +2,9 @@
 
 HTTPClientSecure::HTTPClientSecure(const char* ssid, const char* password,
                                    const char* certs)
-    : ssid_(ssid), password_(password), certs_(certs) {}
+    : ssid_(ssid), password_(password), certs_(certs) {
+  bearer_token_ = "";
+}
 
 void HTTPClientSecure::setup() {
   WiFi.mode(WIFI_STA);
@@ -20,17 +22,27 @@ void HTTPClientSecure::setup() {
 
 void HTTPClientSecure::loop() {}
 
+void HTTPClientSecure::set_bearer_token(String bearer_token) {
+  bearer_token_ = bearer_token;
+}
+
 String HTTPClientSecure::get(const char* url) {
   WiFiClientSecure* client = new WiFiClientSecure;
   if (client) {
     // set secure client with certificate
     client->setCACert(certs_);
+    client->setInsecure();
 
     HTTPClient https;
 
     Serial.print("[HTTPS] begin...\n");
     if (https.begin(*client, url)) {
       Serial.print("[HTTPS] GET...\n");
+
+      if (!bearer_token_.isEmpty()) {
+        https.addHeader("Authorization", "Bearer " + bearer_token_);
+        Serial.println(bearer_token_);
+      }
 
       int httpCode = https.GET();
       if (httpCode > 0) {
@@ -56,11 +68,13 @@ String HTTPClientSecure::get(const char* url) {
   return "";
 }
 
-String HTTPClientSecure::post(const char* url, String payload) {
+String HTTPClientSecure::post(const char* url, String& content_type,
+                              String& payload) {
   WiFiClientSecure* client = new WiFiClientSecure;
   if (client) {
     // set secure client with certificate
     client->setCACert(certs_);
+    client->setInsecure();
 
     HTTPClient https;
 
@@ -68,7 +82,11 @@ String HTTPClientSecure::post(const char* url, String payload) {
     if (https.begin(*client, url)) {
       Serial.print("[HTTPS] POST...\n");
 
-      https.addHeader("Content-Type", "application/json");
+      if (!bearer_token_.isEmpty()) {
+        https.addHeader("Authorization", "Bearer " + bearer_token_);
+      }
+
+      https.addHeader("Content-Type", content_type);
       int httpCode = https.POST(payload);
       if (httpCode > 0) {
         Serial.printf("[HTTPS] POST... code: %d\n", httpCode);

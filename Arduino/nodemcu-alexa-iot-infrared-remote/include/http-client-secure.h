@@ -10,14 +10,16 @@ class HTTPClientSecure {
   HTTPClientSecure(const char* ssid, const char* password, const char* certs);
   void setup();
   void loop();
+  void set_bearer_token(String bearer_token);
 
   String get(const char* url);
-  String post(const char* url, String payload);
+  String post(const char* url, String& content_type, String& payload);
 
  private:
   const char* ssid_;
   const char* password_;
   const char* certs_;
+  String bearer_token_;
 };
 
 #endif  // HTTP_CLIENT_SECURE_H

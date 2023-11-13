@@ -85,7 +85,9 @@ public class Startup
                     builder
                         .AllowCredentials()
                         .WithOrigins(
-                            "https://localhost:4200", "https://localhost:4204", "https://yellow-stone-0df16c003.3.azurestaticapps.net/", "https://localhost:5001")
+                            "https://localhost:4200", "https://localhost:4204",
+                            "https://yellow-stone-0df16c003.3.azurestaticapps.net/",
+                            "https://localhost:5001")
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -179,6 +181,7 @@ public class Startup
 
         app.UseSession();
 
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
@@ -188,6 +191,7 @@ public class Startup
 
         SeedData(app);
     }
+
 
     public static async void SeedData(IApplicationBuilder app)
     {
@@ -208,7 +212,7 @@ public class Startup
 
         try
         {
-            await context.Database.MigrateAsync();
+            //await context.Database.MigrateAsync();
         }
         catch (Exception ex)
         {

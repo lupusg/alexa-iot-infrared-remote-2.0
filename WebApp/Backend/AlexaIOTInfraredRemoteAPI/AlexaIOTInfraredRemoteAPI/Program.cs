@@ -1,5 +1,4 @@
 using AlexaIOTInfraredRemoteAPI.Extensions;
-using AlexaIOTInfraredRemoteAPI.Infrastructure;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
@@ -33,7 +32,9 @@ internal class Program
                     corsPolicyBuilder
                         .AllowCredentials()
                         .WithOrigins(
-                            "https://localhost:4200", "https://aiir-web2.azurewebsites.net/")
+                            "https://localhost:4200",
+                            "https://aiir-web2.azurewebsites.net/"
+                            )
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -121,10 +122,22 @@ internal class Program
         builder.Services.AddControllers()
             .AddNewtonsoftJson();
 
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(5001, listenOptions =>
+                {
+                    listenOptions.UseHttps("mycert.pfx", "test123");
+                });
+            });
+        }
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
         {
+            app.Urls.Add("https://0.0.0.0:5001");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -150,6 +163,7 @@ internal class Program
         app.MapControllers();
 
         SeedData(app);
+
 
         app.Run();
     }
