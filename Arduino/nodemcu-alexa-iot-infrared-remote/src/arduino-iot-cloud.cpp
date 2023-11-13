@@ -35,6 +35,8 @@ void ArduinoIoTCloudConnection::setup() {
 
 void ArduinoIoTCloudConnection::loop() { ArduinoCloud.update(); }
 
+bool ArduinoIoTCloudConnection::get_ir_receiver_state() { return ir_receiver_; }
+
 void ArduinoIoTCloudConnection::OnIrSignalOutput1Change() {
   Serial.println("IrSignalOutput 1 changed");
 }

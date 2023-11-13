@@ -21,6 +21,8 @@ void setup() {
 
 void loop() {
   iot_cloud_connection.loop();
-  infrared_receiver.loop();
+  if (iot_cloud_connection.get_ir_receiver_state()) {
+    infrared_receiver.loop();
+  }
   http_client_secure.loop();
 }

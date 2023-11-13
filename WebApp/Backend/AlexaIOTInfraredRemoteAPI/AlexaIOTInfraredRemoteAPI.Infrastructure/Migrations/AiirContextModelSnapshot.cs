@@ -28,10 +28,6 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AssignedButton")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -40,6 +36,10 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InfraredData")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IrSignalOutput")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

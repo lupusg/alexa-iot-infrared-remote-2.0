@@ -1,6 +1,8 @@
 ﻿using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories;
 using System.Runtime.CompilerServices;
+using AlexaIOTInfraredRemoteAPI.Application.Services;
+using AlexaIOTInfraredRemoteAPI.Domain.Services;
 
 namespace AlexaIOTInfraredRemoteAPI.Extensions
 {
@@ -8,7 +10,9 @@ namespace AlexaIOTInfraredRemoteAPI.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ISignalRepository, SignalRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IInfraredSignalService, InfraredSignalService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return services;
         }
     }

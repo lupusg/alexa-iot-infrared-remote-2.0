@@ -35,5 +35,7 @@ void InfraredReceiver::loop() {
 
     Serial.println(resultToSourceCode(&results_));
     Serial.println();
+    
+    irrecv_.resume();
   }
 }

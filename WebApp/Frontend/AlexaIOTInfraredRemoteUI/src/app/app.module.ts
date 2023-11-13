@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { ButtonModule } from 'primeng/button';
 
 import {
@@ -15,6 +13,7 @@ import {
 
 import { environment } from 'src/environments/environment.development';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FeaturesModule } from './features/features.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { FormsModule } from '@angular/forms';
@@ -26,12 +25,9 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { AppConfigModule } from './core/components/config/config.module';
-import { DashboardModule } from './features/dashboard/dashboard.module';
-import { InfraredSignalsComponent } from './features/infrared-signals/infrared-signals.component';
-import { BoardSettingsComponent } from './features/board-settings/board-settings.component';
 
 @NgModule({
-  declarations: [AppComponent, InfraredSignalsComponent, BoardSettingsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -52,10 +48,10 @@ import { BoardSettingsComponent } from './features/board-settings/board-settings
         secureRoutes: [environment.apiUrl],
       },
     }),
-    DashboardModule,
     ButtonModule,
     SharedModule,
     CoreModule,
+    FeaturesModule,
     FormsModule,
     InputTextModule,
     SidebarModule,
