@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AiirContext))]
-    [Migration("20231106130114_NewIrModels")]
-    partial class NewIrModels
+    [Migration("20231113134326_UserIdentitySignalsLatest3")]
+    partial class UserIdentitySignalsLatest3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -82,7 +82,9 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                 {
                     b.HasOne("AlexaIOTInfraredRemoteAPI.Domain.User", null)
                         .WithMany("InfraredSignals")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.User", b =>

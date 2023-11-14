@@ -15,7 +15,7 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
 
         }
 
-        public static User Create(string name, string email)
+        public static User Create(Guid externalId, string name, string email)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Name can't be empty");
@@ -23,13 +23,23 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
             if (string.IsNullOrEmpty(email))
                 throw new ArgumentException("Email can't be empty");
 
+            if (externalId == Guid.Empty)
+                throw new ArgumentException("External Id can't be empty");
+
             User user = new()
             {
+                Id = Guid.NewGuid(),
+                ExternalId = externalId,
                 Name = name,
                 Email = email
             };
 
             return user;
+        }
+
+        public void AddInfraredSignal(InfraredSignal infraredSignal)
+        {
+            _infraredSignals.Add(infraredSignal);
         }
     }
 }

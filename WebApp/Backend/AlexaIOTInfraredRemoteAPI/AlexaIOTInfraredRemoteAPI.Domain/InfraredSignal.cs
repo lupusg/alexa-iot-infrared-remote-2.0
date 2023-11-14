@@ -6,6 +6,7 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
         public string Description { get; private set; } = string.Empty;
         public string InfraredData { get; private set; } = string.Empty;
         public string IrSignalOutput { get; private set; } = string.Empty;
+        public Guid UserId { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
         private InfraredSignal()

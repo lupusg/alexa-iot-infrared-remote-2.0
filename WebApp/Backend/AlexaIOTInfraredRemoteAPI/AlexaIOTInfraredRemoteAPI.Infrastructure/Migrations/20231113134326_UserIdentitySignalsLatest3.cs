@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewIrModels : Migration
+    public partial class UserIdentitySignalsLatest3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,8 +33,8 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InfraredData = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IrSignalOutput = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +43,8 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         name: "FK_InfraredSignals_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

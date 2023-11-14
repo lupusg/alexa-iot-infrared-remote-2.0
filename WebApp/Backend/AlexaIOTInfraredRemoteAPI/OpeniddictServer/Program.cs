@@ -61,7 +61,7 @@ public class Program
                     {
                         options.ListenAnyIP(44395, listenOptions =>
                         {
-                            listenOptions.UseHttps("mycert.pfx", "test123");
+                            listenOptions.UseHttps("localhost_192_168_0_104_mycustomdomain_com.pfx", "test123");
                         });
                     });
                 }

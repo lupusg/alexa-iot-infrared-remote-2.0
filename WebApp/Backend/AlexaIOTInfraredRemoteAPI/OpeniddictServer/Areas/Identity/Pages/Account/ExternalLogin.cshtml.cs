@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AlexaIOTInfraredRemoteAPI.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -23,18 +25,21 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IUserService _userService;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUserService userService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _userService = userService;
         }
 
         [BindProperty]
@@ -73,7 +78,7 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
             if (remoteError != null)
             {
                 ErrorMessage = $"Error from external provider: {remoteError}";
-                return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
+                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -83,7 +88,7 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
@@ -125,9 +130,11 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
                 var claims = info.Principal.Claims.ToList();
                 var pictureUrl = claims[5].Value;
 
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PictureUrl = pictureUrl};
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PictureUrl = pictureUrl };
 
                 var result = await _userManager.CreateAsync(user);
+
+
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
@@ -146,6 +153,10 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
 
                         await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        //also register the api user
+                        var apiUser = AlexaIOTInfraredRemoteAPI.Domain.User.Create(new Guid(user.Id), user.Email, user.Email);
+                        _userService.RegisterUser(apiUser);
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)

@@ -5,8 +5,11 @@ using Quartz;
 using OpeniddictServer.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.Extensions.Options;
-using System.IdentityModel.Tokens.Jwt;
+using AlexaIOTInfraredRemoteAPI.Application.Services;
+using AlexaIOTInfraredRemoteAPI.Domain.Services;
+using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
+using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
+using AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories;
 
 namespace OpeniddictServer;
 
@@ -42,6 +45,13 @@ public class Startup
             .AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
 
         services.AddDistributedMemoryCache();
+
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddDbContext<AiirContext>(options =>
+         {
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+         });
 
         services.AddSession(options =>
         {

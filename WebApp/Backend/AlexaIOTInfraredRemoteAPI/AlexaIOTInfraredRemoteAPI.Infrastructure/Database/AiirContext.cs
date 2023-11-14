@@ -10,5 +10,13 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Database
         }
         public DbSet<User> Users { get; set; }
         public DbSet<InfraredSignal> InfraredSignals { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasMany(user => user.InfraredSignals)
+                .WithOne()
+                .HasForeignKey(signal => signal.UserId);
+        }
     }
 }

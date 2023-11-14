@@ -107,9 +107,9 @@ export class AppComponent implements OnInit, OnDestroy {
         const { isAuthenticated, userData, accessToken, idToken, configId } =
           loginResponse;
         if (isAuthenticated) {
-          // this.http
-          //   .get(environment.apiUrl + '/api/weatherforecast')
-          //   .subscribe((val) => console.log(val));
+          this.http
+            .get(environment.apiUrl + '/api/weatherforecast')
+            .subscribe((val) => console.log(val));
           console.log(loginResponse);
         }
         /*...*/

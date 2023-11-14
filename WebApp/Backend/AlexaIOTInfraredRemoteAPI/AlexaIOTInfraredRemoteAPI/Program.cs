@@ -57,8 +57,8 @@ internal class Program
                 options.SetIssuer(builder.Configuration["Openiddict:Issuer"] ?? throw new ArgumentException("Issuer is null."));
                 options.AddAudiences("rs_dataAIIR");
                 options.UseIntrospection()
-                    .SetClientId("rs_dataAIIR")
-                    .SetClientSecret("dataAIIRSecret");
+                .SetClientId("rs_dataAIIR")
+                .SetClientSecret("dataAIIRSecret");
                 options.UseSystemNetHttp();
                 options.UseAspNetCore();
             });
@@ -89,8 +89,8 @@ internal class Program
                 {
                     AuthorizationCode = new OpenApiOAuthFlow
                     {
-                        AuthorizationUrl = new Uri("https://localhost:44395/connect/authorize"),
-                        TokenUrl = new Uri("https://localhost:44395/connect/token"),
+                        AuthorizationUrl = new Uri(builder.Configuration["Openiddict:Issuer"] + "/connect/authorize"),
+                        TokenUrl = new Uri(builder.Configuration["Openiddict:Issuer"] + "/connect/token"),
                         Scopes = new Dictionary<string, string>
                         {
                             { "openid", "OpenID" },
@@ -128,7 +128,7 @@ internal class Program
             {
                 options.ListenAnyIP(5001, listenOptions =>
                 {
-                    listenOptions.UseHttps("mycert.pfx", "test123");
+                    listenOptions.UseHttps("localhost_192_168_0_104_mycustomdomain_com.pfx", "test123");
                 });
             });
         }
