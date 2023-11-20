@@ -22,5 +22,14 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
             var infraredSignals = await _signalRepository.ListAsync(spec);
             return infraredSignals;
         }
+        public async Task<InfraredSignal> CreateInfraredSignal(Guid userId, int length, int[] infraredData)
+        {
+            var user = await _signalRepository.GetByExternalId(userId);
+            var infraredSignalToAdd = InfraredSignal.Create("N/A", infraredData, length, "N/A", DateTime.UtcNow);
+            user.AddInfraredSignal(infraredSignalToAdd);
+            _signalRepository.Add(infraredSignalToAdd);
+            await _signalRepository.SaveAsync();
+            return infraredSignalToAdd;
+        }
     }
 }
