@@ -25,6 +25,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { AppConfigModule } from './core/components/config/config.module';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -64,6 +65,7 @@ import { AppConfigModule } from './core/components/config/config.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    MessageService
   ],
   bootstrap: [AppComponent],
 })
