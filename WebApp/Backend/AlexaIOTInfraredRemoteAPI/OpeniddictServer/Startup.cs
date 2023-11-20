@@ -5,8 +5,11 @@ using Quartz;
 using OpeniddictServer.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.Extensions.Options;
-using System.IdentityModel.Tokens.Jwt;
+using AlexaIOTInfraredRemoteAPI.Application.Services;
+using AlexaIOTInfraredRemoteAPI.Domain.Services;
+using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
+using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
+using AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories;
 
 namespace OpeniddictServer;
 
@@ -42,6 +45,13 @@ public class Startup
             .AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
 
         services.AddDistributedMemoryCache();
+
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddDbContext<AiirContext>(options =>
+         {
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+         });
 
         services.AddSession(options =>
         {
@@ -85,7 +95,9 @@ public class Startup
                     builder
                         .AllowCredentials()
                         .WithOrigins(
-                            "https://localhost:4200", "https://localhost:4204", "https://yellow-stone-0df16c003.3.azurestaticapps.net/", "https://localhost:5001")
+                            "https://localhost:4200", "https://localhost:4204",
+                            "https://yellow-stone-0df16c003.3.azurestaticapps.net/",
+                            "https://localhost:5001")
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -179,6 +191,7 @@ public class Startup
 
         app.UseSession();
 
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
@@ -188,6 +201,7 @@ public class Startup
 
         SeedData(app);
     }
+
 
     public static async void SeedData(IApplicationBuilder app)
     {
@@ -208,7 +222,7 @@ public class Startup
 
         try
         {
-            await context.Database.MigrateAsync();
+            //await context.Database.MigrateAsync();
         }
         catch (Exception ex)
         {

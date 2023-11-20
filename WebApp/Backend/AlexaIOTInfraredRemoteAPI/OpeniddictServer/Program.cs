@@ -55,6 +55,16 @@ public class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
+                if (webBuilder.GetSetting("environment") == Environments.Development)
+                {
+                    webBuilder.UseKestrel(options =>
+                    {
+                        options.ListenAnyIP(44395, listenOptions =>
+                        {
+                            listenOptions.UseHttps("localhost_192_168_0_104_mycustomdomain_com.pfx", "test123");
+                        });
+                    });
+                }
             });
 
 }

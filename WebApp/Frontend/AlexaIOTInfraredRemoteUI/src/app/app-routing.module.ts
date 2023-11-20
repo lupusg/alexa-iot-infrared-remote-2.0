@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { InfraredSignalsComponent } from './features/infrared-signals/infrared-signals.component';
-import { BoardSettingsComponent } from './features/board-settings/board-settings.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
+    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
     path: 'infrared-signals',
-    component: InfraredSignalsComponent,
+    loadChildren: () => import('./features/infrared-signals/infrared-signals.module').then(m => m.InfraredSignalsModule),
   },
   {
     path: 'board-settings',
-    component: BoardSettingsComponent
-
+    loadChildren: () => import('./features/board-settings/board-settings.module').then(m => m.BoardSettingsModule),
   }
 ];
 

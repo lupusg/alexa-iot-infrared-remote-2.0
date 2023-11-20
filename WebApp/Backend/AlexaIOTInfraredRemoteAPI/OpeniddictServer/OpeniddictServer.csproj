@@ -32,4 +32,9 @@
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AlexaIOTInfraredRemoteAPI.Application\AlexaIOTInfraredRemoteAPI.Application.csproj" />
+    <ProjectReference Include="..\AlexaIOTInfraredRemoteAPI.Domain\AlexaIOTInfraredRemoteAPI.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

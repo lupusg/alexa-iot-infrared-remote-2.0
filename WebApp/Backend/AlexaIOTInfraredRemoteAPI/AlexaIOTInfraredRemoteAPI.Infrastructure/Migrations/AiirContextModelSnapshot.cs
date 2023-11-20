@@ -35,7 +35,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InfraredData")
+                    b.Property<string>("InfraredDataAsString")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -43,7 +43,10 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -79,7 +82,9 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                 {
                     b.HasOne("AlexaIOTInfraredRemoteAPI.Domain.User", null)
                         .WithMany("InfraredSignals")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.User", b =>

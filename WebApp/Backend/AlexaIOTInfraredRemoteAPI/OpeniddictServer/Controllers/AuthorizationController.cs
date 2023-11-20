@@ -330,8 +330,11 @@ public class AuthorizationController : Controller
             roleType: Claims.Role);
 
         // Add the claims that will be persisted in the tokens (use the client_id as the subject identifier).
-        identity.AddClaim(Claims.Subject, await _applicationManager.GetClientIdAsync(application));
-        identity.AddClaim(Claims.Name, await _applicationManager.GetDisplayNameAsync(application));
+        var clientId = await _applicationManager.GetClientIdAsync(application);
+        var displayName = await _applicationManager.GetDisplayNameAsync(application);
+
+        identity.AddClaim(Claims.Subject, clientId);
+        identity.AddClaim(Claims.Name, displayName);
 
         // Note: In the original OAuth 2.0 specification, the client credentials grant
         // doesn't return an identity token, which is an OpenID Connect concept.
@@ -343,8 +346,10 @@ public class AuthorizationController : Controller
 
         // Set the list of scopes granted to the client application in access_token.
         var principal = new ClaimsPrincipal(identity);
+
         principal.SetScopes(request.GetScopes());
-        principal.SetResources(await _scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
+        var resources = await _scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync();
+        principal.SetResources(resources);
 
         foreach (var claim in principal.Claims)
         {

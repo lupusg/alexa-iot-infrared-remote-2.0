@@ -1,5 +1,4 @@
 using AlexaIOTInfraredRemoteAPI.Extensions;
-using AlexaIOTInfraredRemoteAPI.Infrastructure;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
@@ -33,7 +32,9 @@ internal class Program
                     corsPolicyBuilder
                         .AllowCredentials()
                         .WithOrigins(
-                            "https://localhost:4200", "https://aiir-web2.azurewebsites.net/")
+                            "https://localhost:4200",
+                            "https://aiir-web2.azurewebsites.net/"
+                            )
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -56,8 +57,8 @@ internal class Program
                 options.SetIssuer(builder.Configuration["Openiddict:Issuer"] ?? throw new ArgumentException("Issuer is null."));
                 options.AddAudiences("rs_dataAIIR");
                 options.UseIntrospection()
-                    .SetClientId("rs_dataAIIR")
-                    .SetClientSecret("dataAIIRSecret");
+                .SetClientId("rs_dataAIIR")
+                .SetClientSecret("dataAIIRSecret");
                 options.UseSystemNetHttp();
                 options.UseAspNetCore();
             });
@@ -88,8 +89,8 @@ internal class Program
                 {
                     AuthorizationCode = new OpenApiOAuthFlow
                     {
-                        AuthorizationUrl = new Uri("https://localhost:44395/connect/authorize"),
-                        TokenUrl = new Uri("https://localhost:44395/connect/token"),
+                        AuthorizationUrl = new Uri(builder.Configuration["Openiddict:Issuer"] + "/connect/authorize"),
+                        TokenUrl = new Uri(builder.Configuration["Openiddict:Issuer"] + "/connect/token"),
                         Scopes = new Dictionary<string, string>
                         {
                             { "openid", "OpenID" },
@@ -121,10 +122,22 @@ internal class Program
         builder.Services.AddControllers()
             .AddNewtonsoftJson();
 
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(5001, listenOptions =>
+                {
+                    listenOptions.UseHttps("localhost_192_168_0_104_mycustomdomain_com.pfx", "test123");
+                });
+            });
+        }
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
         {
+            app.Urls.Add("https://0.0.0.0:5001");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -150,6 +163,7 @@ internal class Program
         app.MapControllers();
 
         SeedData(app);
+
 
         app.Run();
     }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardSettingsComponent } from './board-settings.component';
+import { BoardSettingsRoutingModule } from './board-settings-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { BoardSettingsComponent } from './board-settings.component';
     BoardSettingsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BoardSettingsRoutingModule
   ]
 })
 export class BoardSettingsModule { }
