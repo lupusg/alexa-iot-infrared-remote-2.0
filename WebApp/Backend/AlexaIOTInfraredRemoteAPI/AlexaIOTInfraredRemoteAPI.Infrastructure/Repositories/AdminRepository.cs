@@ -4,11 +4,11 @@ using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class AdminRepository: IAdminRepository
     {
         private readonly AiirContext _context;
 
-        public UserRepository(AiirContext context)
+        public AdminRepository(AiirContext context)
         {
             _context = context;
         }

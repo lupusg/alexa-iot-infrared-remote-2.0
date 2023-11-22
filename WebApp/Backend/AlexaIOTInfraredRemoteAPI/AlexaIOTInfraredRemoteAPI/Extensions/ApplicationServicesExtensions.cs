@@ -12,9 +12,9 @@ namespace AlexaIOTInfraredRemoteAPI.Extensions
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-            services.AddScoped<IInfraredSignalService, InfraredSignalService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return services;

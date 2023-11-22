@@ -1,3 +1,6 @@
+#ifndef API_LOGIN_SERVICE_H_
+#define API_LOGIN_SERVICE_H_
+
 #include <ArduinoJson.h>
 
 #include "http-client-secure.h"
@@ -14,3 +17,5 @@ class ApiLoginService {
 
   String login(String api_url);
 };
+
+#endif // API_LOGIN_SERVICE_

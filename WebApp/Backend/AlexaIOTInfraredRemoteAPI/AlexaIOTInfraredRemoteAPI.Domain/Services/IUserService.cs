@@ -2,6 +2,7 @@
 {
     public interface IUserService
     {
-        public void RegisterUser (User user);
+        Task<InfraredSignal> CreateInfraredSignal(Guid userId, int length, int[] infraredData);
+        Task<IReadOnlyList<InfraredSignal>> GetInfraredSignals(string sort);
     }
 }

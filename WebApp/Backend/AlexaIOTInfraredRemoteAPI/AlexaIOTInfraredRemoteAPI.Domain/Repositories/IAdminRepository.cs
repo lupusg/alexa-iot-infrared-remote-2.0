@@ -1,6 +1,6 @@
 ﻿namespace AlexaIOTInfraredRemoteAPI.Domain.Repositories
 {
-    public interface IUserRepository
+    public interface IAdminRepository
     {
         public void RegisterUser(User user);
 

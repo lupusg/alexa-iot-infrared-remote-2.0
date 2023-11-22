@@ -7,8 +7,8 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
         public string Name { get; private set; } = string.Empty;
         public string Email { get; private set; } = string.Empty;
 
-        private List<InfraredSignal> _infraredSignals = new();
-        public IReadOnlyCollection<InfraredSignal> InfraredSignals => _infraredSignals;
+        private List<Board> _boards = new();
+        public IReadOnlyCollection<Board> Boards { get; private set; }
 
         private User()
         {
@@ -35,11 +35,6 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
             };
 
             return user;
-        }
-
-        public void AddInfraredSignal(InfraredSignal infraredSignal)
-        {
-            _infraredSignals.Add(infraredSignal);
         }
     }
 }
