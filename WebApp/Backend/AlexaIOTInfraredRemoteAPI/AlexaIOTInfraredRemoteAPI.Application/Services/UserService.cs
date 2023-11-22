@@ -1,7 +1,6 @@
 ﻿using AlexaIOTInfraredRemoteAPI.Domain;
 using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
 using AlexaIOTInfraredRemoteAPI.Domain.Services;
-using AlexaIOTInfraredRemoteAPI.Infrastructure.Specifications;
 using AutoMapper;
 
 namespace AlexaIOTInfraredRemoteAPI.Application.Services
@@ -9,27 +8,31 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
     public class UserService : IUserService
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<InfraredSignal> _signalRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IMapper mapper, IGenericRepository<InfraredSignal> signalRepository)
+        public UserService(IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
-            _signalRepository = signalRepository;
+            _userRepository = userRepository;
         }
         public async Task<IReadOnlyList<InfraredSignal>> GetInfraredSignals(string sort)
         {
-            var spec = new InfraredSignalsWithBasicInformation(sort);
-            var infraredSignals = await _signalRepository.ListAsync(spec);
-            return infraredSignals;
+            //var spec = new InfraredSignalsWithBasicInformation(sort);
+            //var infraredSignals = await _userRepository.ListAsync(spec);
+            //return infraredSignals;
+            return null;
         }
-        public async Task<InfraredSignal> CreateInfraredSignal(Guid userId, int length, int[] infraredData)
+        public async Task<InfraredSignal> CreateInfraredSignal(string clientId, int length, int[] infraredData)
         {
-            var user = await _signalRepository.GetByExternalId(userId);
-            var infraredSignalToAdd = InfraredSignal.Create("N/A", infraredData, length, "N/A", DateTime.UtcNow);
-            //user.AddInfraredSignal(infraredSignalToAdd);
-            _signalRepository.Add(infraredSignalToAdd);
-            await _signalRepository.SaveAsync();
-            return infraredSignalToAdd;
+            var board = await _userRepository.GetBoard(clientId);
+
+            //var user = await _userRepository.GetByExternalId(userId);
+            //var infraredSignalToAdd = InfraredSignal.Create("N/A", infraredData, length, "N/A", DateTime.UtcNow);
+            ////user.AddInfraredSignal(infraredSignalToAdd);
+            //_userRepository.Add(infraredSignalToAdd);
+            //await _userRepository.SaveAsync();
+            //return infraredSignalToAdd;
+            return null;
         }
     }
 }

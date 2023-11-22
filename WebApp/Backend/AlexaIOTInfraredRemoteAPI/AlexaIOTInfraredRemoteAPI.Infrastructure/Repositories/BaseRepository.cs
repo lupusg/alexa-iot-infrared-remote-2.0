@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
 {
-    public class GenericRepository<T>: IGenericRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         private readonly AiirContext _context;
-        public GenericRepository(AiirContext context)
+        public BaseRepository(AiirContext context)
         {
             _context = context;
         }
@@ -22,14 +22,6 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
         {
             await _context.SaveChangesAsync();
         }
-        public async Task<User> GetByExternalId(Guid userId)
-        {
-            var result = await _context.Users
-                .FirstAsync(s => s.ExternalId != null && s.ExternalId.Equals(userId));
-
-            return result;
-        }
-
         public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
@@ -38,5 +30,6 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
+
     }
 }

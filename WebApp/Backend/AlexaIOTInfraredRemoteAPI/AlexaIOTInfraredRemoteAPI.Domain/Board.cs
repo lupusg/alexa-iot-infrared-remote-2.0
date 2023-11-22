@@ -3,11 +3,8 @@
     public class Board : BaseEntity
     {
         public string Name { get; private set; }
-
         public Guid? UserId { get; private set; }
-
         public User? User { get; private set; }
-
         private List<InfraredSignal> _infraredSignals = new();
         public IReadOnlyCollection<InfraredSignal> InfraredSignals => _infraredSignals;
 
@@ -22,6 +19,11 @@
             {
                 Name = name,
             };
+        }
+
+        public void AddInfraredSignal(InfraredSignal infraredSignal)
+        {
+            _infraredSignals.Add(infraredSignal);
         }
     }
 }

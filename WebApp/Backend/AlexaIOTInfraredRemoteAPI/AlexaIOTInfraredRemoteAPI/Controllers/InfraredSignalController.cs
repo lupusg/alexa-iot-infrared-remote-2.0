@@ -1,11 +1,7 @@
 ﻿using AlexaIOTInfraredRemoteAPI.Domain;
-using AlexaIOTInfraredRemoteAPI.Domain.DTOs;
 using AlexaIOTInfraredRemoteAPI.Domain.Services;
-using AlexaIOTInfraredRemoteAPI.Infrastructure.Specifications;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers
@@ -30,6 +26,7 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers
 
         [HttpPost]
         [Consumes("text/plain")]
+        //used by the board
         public async Task<ActionResult> CreateInfraredSignal()
         {
             using var reader = new StreamReader(Request.Body, Encoding.UTF8);
