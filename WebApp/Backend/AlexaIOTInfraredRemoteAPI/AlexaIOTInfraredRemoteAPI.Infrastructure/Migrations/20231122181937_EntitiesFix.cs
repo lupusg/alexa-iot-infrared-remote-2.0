@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewBoardsModel6 : Migration
+    public partial class EntitiesFix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

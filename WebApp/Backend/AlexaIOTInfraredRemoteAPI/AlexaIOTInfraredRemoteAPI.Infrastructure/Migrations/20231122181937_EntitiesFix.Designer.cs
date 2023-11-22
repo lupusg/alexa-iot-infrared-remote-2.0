@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AiirContext))]
-    [Migration("20231121153845_NewBoardsModel6")]
-    partial class NewBoardsModel6
+    [Migration("20231122181937_EntitiesFix")]
+    partial class EntitiesFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

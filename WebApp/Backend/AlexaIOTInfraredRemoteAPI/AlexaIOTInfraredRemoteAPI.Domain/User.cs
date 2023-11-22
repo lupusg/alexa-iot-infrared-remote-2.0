@@ -8,7 +8,7 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
         public string Email { get; private set; } = string.Empty;
 
         private List<Board> _boards = new();
-        public IReadOnlyCollection<Board> Boards { get; private set; }
+        public IReadOnlyCollection<Board> Boards => _boards;
 
         private User()
         {
