@@ -3,6 +3,7 @@ using AlexaIOTInfraredRemoteAPI.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers
 {
@@ -30,8 +31,8 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers
         public async Task<ActionResult> CreateInfraredSignal()
         {
             using var reader = new StreamReader(Request.Body, Encoding.UTF8);
-            string infraredData = await reader.ReadToEndAsync();
-
+            var infraredData = await reader.ReadToEndAsync();
+            var data = InfraredDataExtractor.ExtractRawData(infraredData);
             var boardClientId = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
 
             //var infraredSignal = await _infraredSignalService.CreateInfraredSignal(Guid.Parse(identityUserId), request.Length, request.InfraredData);
