@@ -28,14 +28,14 @@ void InfraredReceiver::setup() {
   irrecv_.enableIRIn();
 }
 
-void InfraredReceiver::loop() {
+decode_results InfraredReceiver::get_decoded_ir_signal() {
   if (irrecv_.decode(&results_)) {
-    Serial.print(resultToHumanReadableBasic(&results_));
     yield();
-
-    Serial.println(resultToSourceCode(&results_));
-    Serial.println();
-    
     irrecv_.resume();
+    Serial.println(resultToSourceCode(&results_));
+    
+    return results_;
+  } else {
+    return decode_results{};
   }
 }

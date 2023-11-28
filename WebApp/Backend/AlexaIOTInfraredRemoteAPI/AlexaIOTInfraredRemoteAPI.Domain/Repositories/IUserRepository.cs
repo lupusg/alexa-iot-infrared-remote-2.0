@@ -1,9 +1,7 @@
 ﻿namespace AlexaIOTInfraredRemoteAPI.Domain.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository: IBaseRepository<User>
     {
-        public void RegisterUser(User user);
-
-        Task<bool> SaveChangesAsync();
+        Task<Board> GetBoard(string clientId);
     }
 }

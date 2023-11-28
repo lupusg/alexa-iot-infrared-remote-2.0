@@ -2,11 +2,10 @@
 
 namespace AlexaIOTInfraredRemoteAPI.Domain.Repositories
 {
-    public interface IGenericRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : BaseEntity
     {
+        void Add(T entity);
         Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
         Task SaveAsync();
-        void Add(T entity);
-        Task<User> GetByExternalId(Guid userId);
     }
 }

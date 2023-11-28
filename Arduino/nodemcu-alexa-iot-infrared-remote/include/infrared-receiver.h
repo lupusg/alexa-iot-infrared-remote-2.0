@@ -15,7 +15,7 @@ class InfraredReceiver {
                    uint16_t min_unknown_size, bool save_buffer,
                    uint8_t tolerance);
   void setup();
-  void loop();
+  decode_results get_decoded_ir_signal();
 
  private:
   const uint16_t recv_pin_;

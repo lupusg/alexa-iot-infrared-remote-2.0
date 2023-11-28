@@ -22,10 +22,33 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.Board", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Boards");
+                });
+
             modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.InfraredSignal", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BoardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -46,12 +69,9 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("BoardId");
 
                     b.ToTable("InfraredSignals");
                 });
@@ -78,18 +98,30 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.Board", b =>
+                {
+                    b.HasOne("AlexaIOTInfraredRemoteAPI.Domain.User", "User")
+                        .WithMany("Boards")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.InfraredSignal", b =>
                 {
-                    b.HasOne("AlexaIOTInfraredRemoteAPI.Domain.User", null)
+                    b.HasOne("AlexaIOTInfraredRemoteAPI.Domain.Board", null)
                         .WithMany("InfraredSignals")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BoardId");
+                });
+
+            modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.Board", b =>
+                {
+                    b.Navigation("InfraredSignals");
                 });
 
             modelBuilder.Entity("AlexaIOTInfraredRemoteAPI.Domain.User", b =>
                 {
-                    b.Navigation("InfraredSignals");
+                    b.Navigation("Boards");
                 });
 #pragma warning restore 612, 618
         }

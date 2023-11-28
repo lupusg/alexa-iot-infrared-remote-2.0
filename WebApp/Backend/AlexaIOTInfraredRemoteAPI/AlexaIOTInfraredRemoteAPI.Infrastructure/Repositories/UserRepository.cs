@@ -1,26 +1,22 @@
 ﻿using AlexaIOTInfraredRemoteAPI.Domain;
 using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository: BaseRepository<User>, IUserRepository 
     {
-        private readonly AiirContext _context;
+        private readonly AiirContext _dbContext;
 
-        public UserRepository(AiirContext context)
+        public UserRepository(AiirContext dbContext) : base(dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
-        public void RegisterUser(User user)
+        public Task<Board> GetBoard(string clientId)
         {
-            _context.Users.Add(user);
-        }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
+            return _dbContext.Boards.FirstAsync(x => x.Name == clientId);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
-        private readonly IUserService _userService;
+        private readonly IAdminService _adminService;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
@@ -33,13 +33,13 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
             UserManager<ApplicationUser> userManager,
             ILogger<ExternalLoginModel> logger,
             IEmailSender emailSender,
-            IUserService userService)
+            IAdminService adminService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
-            _userService = userService;
+            _adminService = adminService;
         }
 
         [BindProperty]
@@ -156,7 +156,7 @@ namespace OpeniddictServer.Areas.Identity.Pages.Account
 
                         //also register the api user
                         var apiUser = AlexaIOTInfraredRemoteAPI.Domain.User.Create(new Guid(user.Id), user.Email, user.Email);
-                        _userService.RegisterUser(apiUser);
+                        await _adminService.RegisterUser(apiUser);
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)

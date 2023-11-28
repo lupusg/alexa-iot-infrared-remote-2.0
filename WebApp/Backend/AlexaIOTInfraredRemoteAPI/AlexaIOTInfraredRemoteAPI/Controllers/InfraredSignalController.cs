@@ -1,11 +1,9 @@
 ﻿using AlexaIOTInfraredRemoteAPI.Domain;
-using AlexaIOTInfraredRemoteAPI.Domain.DTOs;
 using AlexaIOTInfraredRemoteAPI.Domain.Services;
-using AlexaIOTInfraredRemoteAPI.Infrastructure.Specifications;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers
 {
@@ -14,23 +12,31 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers
     [Authorize]
     public class InfraredSignalController : ControllerBase
     {
-        private readonly IInfraredSignalService _infraredSignalService;
-        public InfraredSignalController(IInfraredSignalService infraredSignalService)
+        private readonly IUserService _userService;
+        public InfraredSignalController(IUserService userService)
         {
-            _infraredSignalService = infraredSignalService;
+            _userService = userService;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<InfraredSignal>>> GetInfraredSignals(string sort)
         {
-            var infraredSignals = await _infraredSignalService.GetInfraredSignals(sort);
+            var infraredSignals = await _userService.GetInfraredSignals(sort);
             return Ok(infraredSignals);
         }
+
         [HttpPost]
-        public async Task<ActionResult> CreateInfraredSignal([FromBody] InsertInfraredSignalRequest request)
+        [Consumes("text/plain")]
+        //used by the board
+        public async Task<ActionResult> CreateInfraredSignal()
         {
-            var identityUserId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
-            var infraredSignal = await _infraredSignalService.CreateInfraredSignal(Guid.Parse(identityUserId), request.Length, request.InfraredData);
-            return Ok(infraredSignal);
+            using var reader = new StreamReader(Request.Body, Encoding.UTF8);
+            var infraredData = await reader.ReadToEndAsync();
+            var data = InfraredDataExtractor.ExtractRawData(infraredData);
+            var boardClientId = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
+
+            //var infraredSignal = await _infraredSignalService.CreateInfraredSignal(Guid.Parse(identityUserId), request.Length, request.InfraredData);
+            return Ok();
         }
     }
 }

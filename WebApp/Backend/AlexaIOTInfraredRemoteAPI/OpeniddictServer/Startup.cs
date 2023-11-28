@@ -16,7 +16,9 @@ namespace OpeniddictServer;
 public class Startup
 {
     public Startup(IConfiguration configuration)
-        => Configuration = configuration;
+    {
+        Configuration = configuration;
+    }
 
     public IConfiguration Configuration { get; }
 
@@ -46,8 +48,8 @@ public class Startup
 
         services.AddDistributedMemoryCache();
 
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAdminService, AdminService>();
+        services.AddScoped<IAdminRepository, AdminRepository>();
         services.AddDbContext<AiirContext>(options =>
          {
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -203,14 +205,16 @@ public class Startup
     }
 
 
-    public static async void SeedData(IApplicationBuilder app)
+    public async void SeedData(IApplicationBuilder app)
     {
         using var scope = app.ApplicationServices.CreateScope();
         var services = scope.ServiceProvider;
-        var context = services.GetRequiredService<ApplicationDbContext>();
+        //var context = services.GetRequiredService<ApplicationDbContext>();
         var logger = services.GetRequiredService<ILogger<Program>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-        var roles = new[] { "Admin", "User" };
+        //var userManager = services.GetService<UserManager<ApplicationUser>>();
+        //var userService = services.GetService<IAdminService>();
+        var roles = new[] { "Admin", "User", "Board" };
 
         foreach (var role in roles)
         {
@@ -223,6 +227,7 @@ public class Startup
         try
         {
             //await context.Database.MigrateAsync();
+            //await IdentityDbContextSeed.SeedUsersAsync(userManager, userService );
         }
         catch (Exception ex)
         {
