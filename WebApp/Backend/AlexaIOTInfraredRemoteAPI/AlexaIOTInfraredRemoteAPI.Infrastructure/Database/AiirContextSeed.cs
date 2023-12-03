@@ -6,19 +6,25 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Database
     {
         public static async Task SeedAsync(AiirContext context)
         {
-            //seed data logic
+            if (!context.Boards.Any() && !context.InfraredSignals.Any())
+            {
+                var boards = new List<Board>()
+                {
+                    Board.Create("arduino_client")
+                };
 
-            //if (!context.InfraredSignals.Any())
-            //{
-            //    var s1 = InfraredSignal.Create("desc1", "irData1", "irOutput1", DateTime.Now);
-            //    var s2 = InfraredSignal.Create("desc2", "irData2", "irOutput2", DateTime.Now);
-            //    var s3 = InfraredSignal.Create("desc3", "irData3", "irOutput3", DateTime.Now);
-            //    var s4 = InfraredSignal.Create("desc4", "irData4", "irOutput4", DateTime.Now);
-            //    var s5 = InfraredSignal.Create("desc5", "irData5", "irOutput5", DateTime.Now);
+                var infraredSignals = new List<InfraredSignal>();
+                for (var i = 0; i < 20; ++i)
+                {
+                    var signal = InfraredSignal.Create($"description{i}", new[] { 1, 2, 3, 4, 5 }, 5, $"output{i}",
+                        DateTime.Now.AddHours(i));
+                    infraredSignals.Add(signal);
+                    boards[0].AddInfraredSignal(signal);
+                }
 
-            //    var infraredSignals = new List<InfraredSignal>(){ s1, s2, s3, s4, s5 };
-            //    context.InfraredSignals.AddRange(infraredSignals);
-            //}
+                context.Boards.AddRange(boards);
+                context.InfraredSignals.AddRange(infraredSignals);
+            }
 
             await context.SaveChangesAsync();
         }

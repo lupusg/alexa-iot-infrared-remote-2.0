@@ -1,4 +1,5 @@
 ﻿using AlexaIOTInfraredRemoteAPI.Domain;
+using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
 using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
 using AlexaIOTInfraredRemoteAPI.Domain.Services;
 using AutoMapper;
@@ -9,11 +10,13 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
+        private readonly IInfraredSignalRepository _infraredSignalRepository;
 
-        public UserService(IMapper mapper, IUserRepository userRepository)
+        public UserService(IMapper mapper, IUserRepository userRepository, IInfraredSignalRepository infraredSignalRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            _infraredSignalRepository = infraredSignalRepository;
         }
         public async Task<IReadOnlyList<InfraredSignal>> GetInfraredSignals(string sort)
         {
@@ -22,17 +25,17 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
             //return infraredSignals;
             return null;
         }
-        public async Task<InfraredSignal> CreateInfraredSignal(string clientId, int length, int[] infraredData)
+        public async Task<InfraredSignal> CreateInfraredSignal(string clientId, string infraredDataRaw)
         {
-            var board = await _userRepository.GetBoard(clientId);
+            var board = await _userRepository.GetBoardByName(clientId);
+            var infraredData = InfraredDataExtractor.ExtractRawData(infraredDataRaw);
+            var infraredSignal = InfraredSignal.Create("N/A", infraredData, infraredData.Length, "N/A", DateTime.Now);
+            
+            board.AddInfraredSignal(infraredSignal);
+            _infraredSignalRepository.Add(infraredSignal);
 
-            //var user = await _userRepository.GetByExternalId(userId);
-            //var infraredSignalToAdd = InfraredSignal.Create("N/A", infraredData, length, "N/A", DateTime.UtcNow);
-            ////user.AddInfraredSignal(infraredSignalToAdd);
-            //_userRepository.Add(infraredSignalToAdd);
-            //await _userRepository.SaveAsync();
-            //return infraredSignalToAdd;
-            return null;
+            await _infraredSignalRepository.SaveAsync();
+            return infraredSignal;
         }
     }
 }

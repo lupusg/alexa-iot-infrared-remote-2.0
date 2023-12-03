@@ -14,9 +14,9 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<Board> GetBoard(string clientId)
+        public Task<Board> GetBoardByName(string name)
         {
-            return _dbContext.Boards.FirstAsync(x => x.Name == clientId);
+            return _dbContext.Boards.FirstAsync(x => x.Name == name);
         }
     }
 }

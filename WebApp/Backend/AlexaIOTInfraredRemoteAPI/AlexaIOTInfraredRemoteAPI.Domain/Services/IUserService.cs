@@ -2,7 +2,7 @@
 {
     public interface IUserService
     {
-        Task<InfraredSignal> CreateInfraredSignal(string clientId, int length, int[] infraredData);
+        Task<InfraredSignal> CreateInfraredSignal(string clientId, string infraredDataRaw);
         Task<IReadOnlyList<InfraredSignal>> GetInfraredSignals(string sort);
     }
 }

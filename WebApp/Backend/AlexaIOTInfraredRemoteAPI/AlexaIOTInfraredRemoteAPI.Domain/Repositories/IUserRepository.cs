@@ -2,6 +2,6 @@
 {
     public interface IUserRepository: IBaseRepository<User>
     {
-        Task<Board> GetBoard(string clientId);
+        Task<Board> GetBoardByName(string name);
     }
 }

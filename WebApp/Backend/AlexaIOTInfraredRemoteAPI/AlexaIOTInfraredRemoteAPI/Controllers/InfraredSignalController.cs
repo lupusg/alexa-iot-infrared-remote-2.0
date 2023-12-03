@@ -25,18 +25,29 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers
             return Ok(infraredSignals);
         }
 
+        //endpoint used by the board
         [HttpPost]
         [Consumes("text/plain")]
-        //used by the board
         public async Task<ActionResult> CreateInfraredSignal()
         {
             using var reader = new StreamReader(Request.Body, Encoding.UTF8);
-            var infraredData = await reader.ReadToEndAsync();
-            var data = InfraredDataExtractor.ExtractRawData(infraredData);
-            var boardClientId = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
+            var infraredDataRaw = await reader.ReadToEndAsync();
+            var boardName = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
 
-            //var infraredSignal = await _infraredSignalService.CreateInfraredSignal(Guid.Parse(identityUserId), request.Length, request.InfraredData);
-            return Ok();
+            if (string.IsNullOrEmpty(boardName))
+            {
+                return Unauthorized("User not found");
+            }
+
+            try
+            {
+                await _userService.CreateInfraredSignal(boardName, infraredDataRaw);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Unknown error");
+            }
         }
     }
 }

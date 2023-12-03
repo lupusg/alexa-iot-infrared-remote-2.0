@@ -1,4 +1,6 @@
-﻿namespace AlexaIOTInfraredRemoteAPI.Domain
+﻿using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
+
+namespace AlexaIOTInfraredRemoteAPI.Domain
 {
     public class Board : BaseEntity
     {
