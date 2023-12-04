@@ -19,9 +19,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InfraredSignalRoutingModule } from './infrared-signal-routing.module';
 
 @NgModule({
-  declarations: [
-    InfraredSignalsComponent,
-  ],
+  declarations: [InfraredSignalsComponent],
   imports: [
     CommonModule,
     InfraredSignalRoutingModule,
@@ -38,7 +36,7 @@ import { InfraredSignalRoutingModule } from './infrared-signal-routing.module';
     DropdownModule,
     RadioButtonModule,
     InputNumberModule,
-    DialogModule
-  ]
+    DialogModule,
+  ],
 })
-export class InfraredSignalsModule { }
+export class InfraredSignalsModule {}

@@ -1,26 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { InfraredSignal } from 'src/app/shared/models/infrared-signal';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InfraredSignalsService {
-  getInfraredSignals(): InfraredSignal[] {
-    const result: InfraredSignal[] = [];
-  
-    for (let i = 0; i < 50; ++i) {
-      const date = new Date();
-      date.setDate(date.getDate() + i);
-  
-      const infraredSignal: InfraredSignal = {
-        description: 'Signal' + (i + 1),
-        infraredData: 'Data' + (i + 1),
-        irSignalOutput: 'Output' + (i + 1),
-        createdAt: date,
-      };
-      result.push(infraredSignal);
-    }
-  
-    return result;
+  baseUrl = environment.apiUrl + '/api/infrared/signals';
+  constructor(private http: HttpClient) {}
+
+  getInfraredSignals(): Observable<InfraredSignal[]> {
+    return this.http.get<InfraredSignal[]>(this.baseUrl);
   }
 }

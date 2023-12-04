@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { InfraredSignalsService } from './infrared-signals.service';
 import { InfraredSignal } from 'src/app/shared/models/infrared-signal';
+import { SubscriptionsContainer } from 'src/app/shared/utils/subscription-container';
 
 @Component({
   selector: 'app-infrared-signals',
   templateUrl: './infrared-signals.component.html',
   styleUrls: ['./infrared-signals.component.scss'],
 })
-export class InfraredSignalsComponent implements OnInit {
-  productDialog = false;
+export class InfraredSignalsComponent implements OnInit, OnDestroy {
+  subscriptions = new SubscriptionsContainer();
 
-  deleteProductDialog = false;
+  isInfraredDialogVisible = false;
 
-  deleteProductsDialog = false;
+  isDeleteInfraredSignalDialogVisible = false;
+
+  isDeleteInfraredSignalsDialogVisible = false; // multiple signals dialog
 
   infraredSignals: InfraredSignal[] = [];
 
-  product: any = {};
+  infraredSignal: InfraredSignal = {} as InfraredSignal;
 
   selectedInfraredSignals: any[] = [];
 
@@ -26,19 +29,17 @@ export class InfraredSignalsComponent implements OnInit {
 
   cols: any[] = [];
 
-  statuses: any[] = [];
+  outputs: any[] = [];
 
   rowsPerPageOptions = [5, 10, 20];
 
   constructor(
-    // private productService: ProductService,
     private messageService: MessageService,
-    private infraredSignalsService: InfraredSignalsService
+    private infraredSignalsService: InfraredSignalsService,
   ) {}
 
   ngOnInit() {
-    // this.productService.getProducts().then((data) => (this.products = data));
-    this.infraredSignals = this.infraredSignalsService.getInfraredSignals();
+    this.loadSignals();
 
     this.cols = [
       { field: 'product', header: 'Product' },
@@ -48,124 +49,103 @@ export class InfraredSignalsComponent implements OnInit {
       { field: 'inventoryStatus', header: 'Status' },
     ];
 
-    this.statuses = [
-      { label: 'INSTOCK', value: 'instock' },
-      { label: 'LOWSTOCK', value: 'lowstock' },
-      { label: 'OUTOFSTOCK', value: 'outofstock' },
+    this.outputs = [
+      { label: 'Output1', value: 'output1' },
+      { label: 'Output2', value: 'output2' },
+      { label: 'Output3', value: 'output3' },
+      { label: 'Output4', value: 'output4' },
     ];
   }
 
+  ngOnDestroy() {
+    this.subscriptions.dispose();
+  }
+
   onNewClick() {
-    this.product = {};
+    this.infraredSignal = {} as InfraredSignal;
     this.submitted = false;
-    this.productDialog = true;
+    this.isInfraredDialogVisible = true;
   }
 
   onDeleteClick() {
-    this.deleteProductsDialog = true;
+    this.isDeleteInfraredSignalsDialogVisible = true;
   }
 
-  onEditInfraredSignalClick(product: any) {
-    this.product = { ...product };
-    this.productDialog = true;
+  onEditInfraredSignalClick(infraredSignal: InfraredSignal) {
+    this.infraredSignal = { ...infraredSignal };
+    this.isInfraredDialogVisible = true;
   }
 
-  onDeleteInfraredSignalClick(product: any) {
-    this.deleteProductDialog = true;
-    this.product = { ...product };
+  onDeleteInfraredSignalClick(infraredSignal: InfraredSignal) {
+    this.isDeleteInfraredSignalDialogVisible = true;
+    // this.infraredSignal = { ...infraredSignal };
   }
 
-  confirmDeleteSelected() {
-    this.deleteProductsDialog = false;
+  onConfirmDeleteMultipleInfraredSignalsClick() {
+    this.isDeleteInfraredSignalsDialogVisible = false;
     this.infraredSignals = this.infraredSignals.filter(
       (val) => !this.selectedInfraredSignals.includes(val),
     );
     this.messageService.add({
       severity: 'success',
       summary: 'Successful',
-      detail: 'Products Deleted',
+      detail: 'Signals Deleted',
       life: 3000,
     });
     this.selectedInfraredSignals = [];
   }
 
   confirmDelete() {
-    this.deleteProductDialog = false;
+    this.isDeleteInfraredSignalDialogVisible = false;
     // this.infraredSignals = this.infraredSignals.filter((val) => val.id !== this.product.id);
     this.messageService.add({
       severity: 'success',
       summary: 'Successful',
-      detail: 'Product Deleted',
+      detail: 'Signal Deleted',
       life: 3000,
     });
-    this.product = {};
+    this.infraredSignal = {} as InfraredSignal;
   }
 
-  hideDialog() {
-    this.productDialog = false;
+  onHideInfraredDialogClick() {
+    this.isInfraredDialogVisible = false;
     this.submitted = false;
   }
 
-  saveProduct() {
-    this.submitted = true;
-
-    if (this.product.name?.trim()) {
-      if (this.product.id) {
-        this.product.inventoryStatus = this.product.inventoryStatus.value
-          ? this.product.inventoryStatus.value
-          : this.product.inventoryStatus;
-        this.infraredSignals[this.findIndexById(this.product.id)] = this.product;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Updated',
-          life: 3000,
-        });
-      } else {
-        this.product.id = this.createId();
-        this.product.code = this.createId();
-        this.product.image = 'product-placeholder.svg';
-        this.product.inventoryStatus = this.product.inventoryStatus
-          ? this.product.inventoryStatus.value
-          : 'INSTOCK';
-        this.infraredSignals.push(this.product);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Created',
-          life: 3000,
-        });
-      }
-
-      this.infraredSignals = [...this.infraredSignals];
-      this.productDialog = false;
-      this.product = {};
-    }
-  }
-
-  findIndexById(id: string): number {
-    // let index = -1;
-    // for (let i = 0; i < this.infraredSignals.length; i++) {
-    //   if (this.infraredSignals[i].id === id) {
-    //     index = i;
-    //     break;
-    //   }
-    // }
-
-    return -1;
-  }
-
-  createId(): string {
-    let id = '';
-    const chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
+  onSaveInfraredSignalClick() {
+    //
   }
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  private loadSignals() {
+    this.subscriptions.add(
+      this.infraredSignalsService.getInfraredSignals().subscribe({
+        next: (infraredSignals) => {
+          this.infraredSignals = infraredSignals;
+        },
+        error: (error) => {
+          const message = this.getErrorMessage(error);
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: message,
+            life: 3000,
+          });
+        },
+      }),
+    );
+  }
+
+  private getErrorMessage(error: any): string {
+    if (error.status === 401) {
+      return 'You are not logged in.';
+    } else if (error.status === 0){
+      return 'Server error.'
+    }
+    return 'Unknown error.';
   }
 }

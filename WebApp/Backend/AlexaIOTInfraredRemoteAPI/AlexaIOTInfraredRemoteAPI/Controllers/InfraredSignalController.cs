@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
+using System.Security.Claims;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers
 {
@@ -19,10 +20,25 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<InfraredSignal>>> GetInfraredSignals(string sort)
+        public async Task<ActionResult<List<InfraredSignal>>> GetInfraredSignals()
         {
-            var infraredSignals = await _userService.GetInfraredSignals(sort);
-            return Ok(infraredSignals);
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            try
+            {
+                var infraredSignals = await _userService.GetInfraredSignals(new Guid(userId));
+                return Ok(infraredSignals);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("An error occurred");
+            }
+
         }
 
         //endpoint used by the board
@@ -46,7 +62,7 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Unknown error");
+                return BadRequest("An error occurred");
             }
         }
     }

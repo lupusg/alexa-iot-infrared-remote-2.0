@@ -3,6 +3,6 @@
     public interface IUserService
     {
         Task<InfraredSignal> CreateInfraredSignal(string clientId, string infraredDataRaw);
-        Task<IReadOnlyList<InfraredSignal>> GetInfraredSignals(string sort);
+        Task<IReadOnlyCollection<InfraredSignal>> GetInfraredSignals(Guid userId);
     }
 }

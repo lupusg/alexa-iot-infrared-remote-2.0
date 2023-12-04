@@ -18,5 +18,10 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
         {
             return _dbContext.Boards.FirstAsync(x => x.Name == name);
         }
+
+        public async Task<User> GetByExternalId(Guid userId)
+        {
+            return await _dbContext.Users.Include(b  => b.Boards).ThenInclude(b => b.InfraredSignals).FirstAsync(user => user.ExternalId == userId);
+        }
     }
 }
