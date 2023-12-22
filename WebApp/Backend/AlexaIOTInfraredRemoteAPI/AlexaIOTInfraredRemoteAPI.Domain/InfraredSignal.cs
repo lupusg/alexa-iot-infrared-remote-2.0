@@ -8,24 +8,23 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
     {
         public string Description { get; private set; } = string.Empty;
         [NotMapped]
-        public int[] InfraredData { get; private set; }
+        public ushort[] InfraredData { get; private set; } = Array.Empty<ushort>();
         public int Length { get; private set; }
         public string IrSignalOutput { get; private set; } = string.Empty;
-        public Guid ?BoardId { get; private set; }
+        public Guid? BoardId { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public string InfraredDataAsString
+        public string InfraredDataString
         {
-            get { return JsonConvert.SerializeObject(InfraredData); }
-            set { InfraredData = JsonConvert.DeserializeObject<int[]>(value); }
+            get => JsonConvert.SerializeObject(InfraredData);
+            set => InfraredData = JsonConvert.DeserializeObject<ushort[]>(value) ?? Array.Empty<ushort>();
         }
-        //save it to db
-        //check length with int[].length
+
         private InfraredSignal()
         {
 
         }
 
-        public static InfraredSignal Create(string description, int[] infraredData, int length,
+        public static InfraredSignal Create(string description, ushort[] infraredData, int length,
             string irSignalOutput, DateTime createdAt)
         {
             if (string.IsNullOrEmpty(description))

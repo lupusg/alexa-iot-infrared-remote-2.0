@@ -6,15 +6,15 @@ using System.Text;
 using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
 using System.Security.Claims;
 
-namespace AlexaIOTInfraredRemoteAPI.Controllers
+namespace AlexaIOTInfraredRemoteAPI.Controllers.User
 {
     [Route("api/infrared/signals")]
     [ApiController]
     [Authorize]
-    public class InfraredSignalController : ControllerBase
+    public class UserInfraredSignalsController : ControllerBase
     {
         private readonly IUserService _userService;
-        public InfraredSignalController(IUserService userService)
+        public UserInfraredSignalsController(IUserService userService)
         {
             _userService = userService;
         }

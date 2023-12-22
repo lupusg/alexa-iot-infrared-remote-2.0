@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
 {
-    public class UserRepository: BaseRepository<User>, IUserRepository 
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly AiirContext _dbContext;
 
@@ -16,12 +16,14 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
 
         public Task<Board> GetBoardByName(string name)
         {
-            return _dbContext.Boards.FirstAsync(x => x.Name == name);
+            return _dbContext.Boards
+                .Include(b => b.InfraredSignals)
+                .FirstAsync(x => x.Name == name);
         }
 
         public async Task<User> GetByExternalId(Guid userId)
         {
-            return await _dbContext.Users.Include(b  => b.Boards).ThenInclude(b => b.InfraredSignals).FirstAsync(user => user.ExternalId == userId);
+            return await _dbContext.Users.Include(b => b.Boards).ThenInclude(b => b.InfraredSignals).FirstAsync(user => user.ExternalId == userId);
         }
     }
 }

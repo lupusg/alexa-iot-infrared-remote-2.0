@@ -47,5 +47,14 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
             await _infraredSignalRepository.SaveAsync();
             return infraredSignal;
         }
+
+        public async Task<InfraredSignal> GetInfraredSignalByOutput(string clientId, string infraredSignalOutput)
+        {
+            var board = await _userRepository.GetBoardByName(clientId);
+            var infraredSignal =
+                board.InfraredSignals.First(signal => signal.IrSignalOutput.Equals(infraredSignalOutput));
+
+            return infraredSignal;
+        }
     }
 }
