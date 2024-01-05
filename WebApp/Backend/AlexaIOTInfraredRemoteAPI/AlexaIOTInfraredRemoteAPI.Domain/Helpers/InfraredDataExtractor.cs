@@ -4,7 +4,7 @@ namespace AlexaIOTInfraredRemoteAPI.Domain.Helpers
 {
     public class InfraredDataExtractor
     {
-        public static int[] ExtractRawData(string data)
+        public static ushort[] ExtractRawData(string data)
         {
             var match = Regex.Match(data, @"\{([^}]*)\}");
             if (!match.Success)
@@ -15,7 +15,7 @@ namespace AlexaIOTInfraredRemoteAPI.Domain.Helpers
             var rawDataString = match.Groups[1].Value;
 
             var rawData = rawDataString.Split(',')
-                                       .Select(s => int.Parse(s.Trim()))
+                                       .Select(s => ushort.Parse(s.Trim()))
                                        .ToArray();
 
             return rawData;

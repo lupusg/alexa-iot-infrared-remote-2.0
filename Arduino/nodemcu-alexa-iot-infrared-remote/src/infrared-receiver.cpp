@@ -33,7 +33,7 @@ decode_results InfraredReceiver::get_decoded_ir_signal() {
     yield();
     irrecv_.resume();
     Serial.println(resultToSourceCode(&results_));
-    
+
     return results_;
   } else {
     return decode_results{};

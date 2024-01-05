@@ -58,7 +58,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InfraredDataAsString")
+                    b.Property<string>("InfraredDataString")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

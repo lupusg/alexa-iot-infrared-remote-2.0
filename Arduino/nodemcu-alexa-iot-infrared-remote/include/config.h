@@ -76,7 +76,9 @@
 #define BAUD_RATE 115200
 
 // Infrared receiver settings
-#define RECV_PIN 14
+#define IR_RECV_PIN 14
+#define IR_SEND_PIN 4
+#define IR_SEND_FREQUENCY 38000
 #define CAPTURE_BUFFER_SIZE 1024
 #define MIN_UNKNOWN_SIZE 12
 #define SAVE_BUFFER false

@@ -10,7 +10,7 @@ void InfraredReceiverService::post_ir_signal() {
     String content_type = "text/plain";
     String payload = resultToSourceCode(&results);
 
-    http_client_.post(API_RESOURCE_SERVER_URL "/api/infrared/signals",
+    http_client_.post(API_RESOURCE_SERVER_URL "/api/board/infrared-signal",
                       content_type, payload);
   }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class EntitiesFix : Migration
+    public partial class UshortInfraredSignalData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,7 +53,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                     IrSignalOutput = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BoardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InfraredDataAsString = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    InfraredDataString = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

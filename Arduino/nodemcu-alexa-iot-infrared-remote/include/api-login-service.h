@@ -18,4 +18,4 @@ class ApiLoginService {
   String login(String api_url);
 };
 
-#endif // API_LOGIN_SERVICE_
+#endif  // API_LOGIN_SERVICE_

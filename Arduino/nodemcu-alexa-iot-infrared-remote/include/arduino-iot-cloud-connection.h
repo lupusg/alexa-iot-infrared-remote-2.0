@@ -6,10 +6,14 @@
 #include <Arduino_ESP32_OTA.h>
 
 #include "config.h"
+#include "http-client-secure.h"
+#include "infrared-transmitter.h"
 
 class ArduinoIoTCloudConnection {
  public:
-  ArduinoIoTCloudConnection(const char *wifi_ssid, const char *wifi_password,
+  ArduinoIoTCloudConnection(InfraredTransmitter &infrared_transmitter,
+                            HTTPClientSecure &http_client_secure,
+                            const char *wifi_ssid, const char *wifi_password,
                             const char *device_login_name,
                             const char *device_key);
   void setup();
@@ -20,6 +24,8 @@ class ArduinoIoTCloudConnection {
   const char *device_login_name_;
   const char *device_key_;
   WiFiConnectionHandler arduino_iot_preferred_connection_;
+  static InfraredTransmitter *infrared_transmitter_;
+  static HTTPClientSecure *http_client_secure_;
 
   static CloudSwitch ir_signal_output1_;
   static CloudSwitch ir_signal_output2_;
