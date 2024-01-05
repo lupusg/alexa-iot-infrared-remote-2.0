@@ -2,9 +2,6 @@
 using AlexaIOTInfraredRemoteAPI.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
-using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
-using System.Security.Claims;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers.User
 {
@@ -39,31 +36,6 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers.User
                 return BadRequest("An error occurred");
             }
 
-        }
-
-        //endpoint used by the board
-        [HttpPost]
-        [Consumes("text/plain")]
-        public async Task<ActionResult> CreateInfraredSignal()
-        {
-            using var reader = new StreamReader(Request.Body, Encoding.UTF8);
-            var infraredDataRaw = await reader.ReadToEndAsync();
-            var boardName = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
-
-            if (string.IsNullOrEmpty(boardName))
-            {
-                return Unauthorized("User not found");
-            }
-
-            try
-            {
-                await _userService.CreateInfraredSignal(boardName, infraredDataRaw);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("An error occurred");
-            }
         }
     }
 }

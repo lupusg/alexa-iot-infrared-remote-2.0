@@ -1,9 +1,11 @@
-﻿namespace AlexaIOTInfraredRemoteAPI.Domain.Services
+﻿using AlexaIOTInfraredRemoteAPI.Domain.DTOs;
+
+namespace AlexaIOTInfraredRemoteAPI.Domain.Services
 {
     public interface IUserService
     {
         Task<InfraredSignal> CreateInfraredSignal(string clientId, string infraredDataRaw);
-        Task<IReadOnlyCollection<InfraredSignal>> GetInfraredSignals(Guid userId);
+        Task<IReadOnlyCollection<InfraredSignalDTO>> GetInfraredSignals(Guid userId);
         Task<InfraredSignal> GetInfraredSignalByOutput(string clientId, string infraredSignalOutput);
     }
 }

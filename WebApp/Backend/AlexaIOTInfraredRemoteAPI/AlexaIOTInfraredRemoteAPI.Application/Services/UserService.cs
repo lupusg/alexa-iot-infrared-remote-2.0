@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using AlexaIOTInfraredRemoteAPI.Domain;
+using AlexaIOTInfraredRemoteAPI.Domain.DTOs;
 using AlexaIOTInfraredRemoteAPI.Domain.Helpers;
 using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
 using AlexaIOTInfraredRemoteAPI.Domain.Services;
@@ -20,11 +21,12 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
             _userRepository = userRepository;
             _infraredSignalRepository = infraredSignalRepository;
         }
-        public async Task<IReadOnlyCollection<InfraredSignal>> GetInfraredSignals(Guid userId)
+        public async Task<IReadOnlyCollection<InfraredSignalDTO>> GetInfraredSignals(Guid userId)
         {
             var user = await _userRepository.GetByExternalId(userId);
             var boards = user.Boards;
             var infraredSignals = new List<InfraredSignal>();
+
             foreach (var board in boards)
             {
                 foreach (var infraredSignal in board.InfraredSignals)
@@ -32,7 +34,9 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
                     infraredSignals.Add(infraredSignal);
                 }
             }
-            return infraredSignals;
+
+            var result = _mapper.Map<List<InfraredSignal>, IReadOnlyCollection<InfraredSignalDTO>>(infraredSignals);
+            return result;
         }
 
         public async Task<InfraredSignal> CreateInfraredSignal(string clientId, string infraredDataRaw)

@@ -3,6 +3,7 @@ using AlexaIOTInfraredRemoteAPI.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace AlexaIOTInfraredRemoteAPI.Controllers.Board
 {
@@ -18,8 +19,8 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers.Board
             _userService = userService;
         }
 
-        [Route("infrared-signal/{infraredSignalOutput}")]
         [HttpGet]
+        [Route("infrared-signal/{infraredSignalOutput}")]
         public async Task<ActionResult> GetInfraredSignal([FromRoute] string infraredSignalOutput)
         {
             var clientId = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
@@ -39,6 +40,31 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers.Board
                 Buffer.BlockCopy(infraredData, 0, buffer, sizeof(ushort), infraredData.Length * sizeof(ushort));
 
                 return File(buffer, "application/octet-stream");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("An error occurred");
+            }
+        }
+
+        [HttpPost]
+        [Route("infrared-signal")]
+        [Consumes("text/plain")]
+        public async Task<ActionResult> CreateInfraredSignal()
+        {
+            using var reader = new StreamReader(Request.Body, Encoding.UTF8);
+            var infraredDataRaw = await reader.ReadToEndAsync();
+            var boardName = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
+
+            if (string.IsNullOrEmpty(boardName))
+            {
+                return Unauthorized("User not found");
+            }
+
+            try
+            {
+                await _userService.CreateInfraredSignal(boardName, infraredDataRaw);
+                return Ok();
             }
             catch (Exception ex)
             {
