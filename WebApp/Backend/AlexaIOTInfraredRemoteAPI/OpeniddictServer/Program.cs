@@ -1,6 +1,7 @@
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using System.Reflection;
 
 namespace OpeniddictServer;
 
@@ -42,8 +43,8 @@ public class Program
 
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables();
-                //.AddUserSecrets("your user secret....");
+                    .AddEnvironmentVariables()
+                    .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
             })
             .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
