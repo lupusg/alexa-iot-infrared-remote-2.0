@@ -36,5 +36,10 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
 
             return user;
         }
+
+        public void AddBoard(Board board)
+        {
+            _boards.Add(board);
+        }
     }
 }

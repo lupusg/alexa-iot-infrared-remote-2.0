@@ -27,6 +27,11 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
         {
             _context.Set<T>().Add(entity);
         }
+
+        public void Remove(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);

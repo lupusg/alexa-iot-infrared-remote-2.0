@@ -10,6 +10,7 @@ using OpeniddictServer.ViewModels.Shared;
 
 namespace OpeniddictServer.Controllers;
 
+[ApiExplorerSettings(IgnoreApi = true)]
 public class ErrorController : Controller
 {
     [Route("error")]

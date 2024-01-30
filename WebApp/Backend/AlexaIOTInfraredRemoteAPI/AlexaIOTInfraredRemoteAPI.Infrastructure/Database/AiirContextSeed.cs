@@ -10,7 +10,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Database
             {
                 var boards = new List<Board>()
                 {
-                    Board.Create("arduino_client")
+                    Board.Create("arduino_client", "arduino_client")
                 };
 
                 var infraredSignals = new List<InfraredSignal>();

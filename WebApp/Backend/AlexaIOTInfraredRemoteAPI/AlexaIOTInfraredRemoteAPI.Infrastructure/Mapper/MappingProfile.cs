@@ -9,6 +9,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Mapper
         public MappingProfile()
         {
             CreateMap<InfraredSignal, InfraredSignalDTO>();
+            CreateMap<Board, BoardDto>();
         }
     }
 }

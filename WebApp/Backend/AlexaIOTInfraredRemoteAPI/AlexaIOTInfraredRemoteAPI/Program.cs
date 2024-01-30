@@ -4,6 +4,7 @@ using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 
 internal class Program

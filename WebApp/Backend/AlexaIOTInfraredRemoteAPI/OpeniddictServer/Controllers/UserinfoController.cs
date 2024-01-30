@@ -12,6 +12,7 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace OpeniddictServer.Controllers;
 
+[ApiExplorerSettings(IgnoreApi = true)]
 public class UserinfoController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;

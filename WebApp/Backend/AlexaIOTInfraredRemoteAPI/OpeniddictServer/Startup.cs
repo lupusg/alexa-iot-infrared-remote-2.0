@@ -10,6 +10,7 @@ using AlexaIOTInfraredRemoteAPI.Domain.Services;
 using AlexaIOTInfraredRemoteAPI.Domain.Repositories;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Database;
 using AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace OpeniddictServer;
 
@@ -49,7 +50,16 @@ public class Startup
         services.AddDistributedMemoryCache();
 
         services.AddScoped<IAdminService, AdminService>();
+        services.AddScoped<IUserService, UserService>();
+
         services.AddScoped<IAdminRepository, AdminRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IBoardRepository, BoardRepository>();
+        services.AddScoped<IInfraredSignalRepository, InfraredSignalRepository>();
+
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
         services.AddDbContext<AiirContext>(options =>
          {
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -160,6 +170,36 @@ public class Startup
                 options.UseAspNetCore();
             });
 
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+            // Set up JWT Bearer authentication for Swagger
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                }
+            });
+        });
+
         services.AddHostedService<Worker>();
     }
 
@@ -171,6 +211,11 @@ public class Startup
         {
             app.UseDeveloperExceptionPage();
             app.UseMigrationsEndPoint();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
         else
         {
