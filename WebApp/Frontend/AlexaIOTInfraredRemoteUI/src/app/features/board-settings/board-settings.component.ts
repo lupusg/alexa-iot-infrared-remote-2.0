@@ -65,7 +65,6 @@ export class BoardSettingsComponent implements OnInit {
 				},
 			}),
 		);
-
 	}
 
 	onCancelButtonClick() {
@@ -85,9 +84,30 @@ export class BoardSettingsComponent implements OnInit {
 
 	private loadBoards() {
 		this.subscriptions.add(
-			this.boardService.getBoards().subscribe((boards) => {
-				this.boards = boards;
+			this.boardService.getBoards().subscribe({
+				next: (boards) => {
+					this.boards = boards;
+				},
+				error: (error) => {
+					const message = this.getErrorMessage(error);
+
+					this.messageService.add({
+						severity: 'error',
+						summary: 'Error',
+						detail: message,
+						life: 3000,
+					});
+				},
 			}),
 		);
+	}
+
+	private getErrorMessage(error: any): string {
+		if (error.status === 401) {
+			return 'You are not logged in.';
+		} else if (error.status === 0) {
+			return 'Server error.';
+		}
+		return 'Unknown error.';
 	}
 }
