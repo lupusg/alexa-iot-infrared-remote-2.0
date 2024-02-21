@@ -48,9 +48,9 @@ namespace OpeniddictServer.Controllers
                             OpenIddictConstants.Permissions.Prefixes.Scope + "dataAIIR"
                         }
                     });
+                    await _userService.RegisterBoard(new Guid(userId), board.Name, board.Secret);
                 }
 
-                await _userService.RegisterBoard(new Guid(userId), board.Name, board.Secret);
 
                 return Ok(board);
             }
@@ -67,11 +67,11 @@ namespace OpeniddictServer.Controllers
 
             try
             {
-               await _userService.RemoveBoard(new Guid(userId), boardName);
-               var app = await _openIddictApplicationManager.FindByClientIdAsync(boardName);
-               await _openIddictApplicationManager.DeleteAsync(app);
+                await _userService.RemoveBoard(new Guid(userId), boardName);
+                var app = await _openIddictApplicationManager.FindByClientIdAsync(boardName);
+                await _openIddictApplicationManager.DeleteAsync(app);
 
-               return Ok();
+                return Ok();
             }
             catch (Exception ex)
             {

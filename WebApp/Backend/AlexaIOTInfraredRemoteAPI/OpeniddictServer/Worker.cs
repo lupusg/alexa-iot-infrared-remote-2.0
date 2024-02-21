@@ -125,24 +125,6 @@ namespace OpeniddictServer
 
                     await manager.CreateAsync(descriptor);
                 }
-
-                // Arduino client
-                if (await manager.FindByClientIdAsync("arduino_client") == null)
-                {
-                    await manager.CreateAsync(new OpenIddictApplicationDescriptor
-                    {
-                        ClientId = "arduino_client",
-                        ClientSecret = "arduino_secret",
-                        DisplayName = "Arduino Client",
-                        Permissions =
-                        {
-                            Permissions.Endpoints.Authorization,
-                            Permissions.Endpoints.Token,
-                            Permissions.GrantTypes.ClientCredentials,
-                            Permissions.Prefixes.Scope + "dataAIIR"
-                        }
-                    });
-                }
             }
 
             static async Task RegisterScopesAsync(IServiceProvider provider)

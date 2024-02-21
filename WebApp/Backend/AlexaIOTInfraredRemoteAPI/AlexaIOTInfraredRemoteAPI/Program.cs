@@ -179,8 +179,8 @@ internal class Program
         try
         {
             await context.Database.MigrateAsync();
-            if (app.Environment.IsDevelopment())
-                await AiirContextSeed.SeedAsync(context);
+            //if (app.Environment.IsDevelopment())
+            //    await AiirContextSeed.SeedAsync(context);
         }
         catch (Exception ex)
         {
