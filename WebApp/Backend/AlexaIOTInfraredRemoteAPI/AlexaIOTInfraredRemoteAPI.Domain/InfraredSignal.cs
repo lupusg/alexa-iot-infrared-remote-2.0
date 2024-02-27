@@ -45,5 +45,25 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
 
             return infraredSignal;
         }
+
+        public void ChangeDescription(string description)
+        {
+            if (string.IsNullOrEmpty(description))
+                throw new ArgumentException("The description can't be empty");
+
+            this.Description = description;
+        }
+
+        public void ChangeIrSignalOutput(string irSignalOutput)
+        {
+            if (string.IsNullOrEmpty(irSignalOutput))
+                throw new ArgumentException("The irSignalOutput can't be null");
+
+            if(!int.TryParse(irSignalOutput, out int value))
+                throw new ArgumentException("The irSignalOutput must be a number");
+
+
+            this.IrSignalOutput = irSignalOutput;
+        }
     }
 }
