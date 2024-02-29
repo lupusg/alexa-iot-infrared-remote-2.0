@@ -27,11 +27,11 @@ class ArduinoIoTCloudConnection {
   static InfraredTransmitter *infrared_transmitter_;
   static HTTPClientSecure *http_client_secure_;
 
-  static CloudSwitch ir_signal_output1_;
-  static CloudSwitch ir_signal_output2_;
-  static CloudSwitch ir_signal_output3_;
-  static CloudSwitch ir_signal_output4_;
-  static CloudSwitch ir_receiver_;
+  static CloudSwitch infrared_output1_;
+  static CloudSwitch infrared_output2_;
+  static CloudSwitch infrared_output3_;
+  static CloudSwitch infrared_output4_;
+  static CloudSwitch infrared_receiver_;
 
   static void OnIrSignalOutput1Change();
   static void OnIrSignalOutput2Change();

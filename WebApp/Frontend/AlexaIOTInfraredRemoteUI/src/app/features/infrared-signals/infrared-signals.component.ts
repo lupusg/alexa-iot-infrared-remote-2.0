@@ -6,146 +6,167 @@ import { InfraredSignal } from 'src/app/shared/models/infrared-signal';
 import { SubscriptionsContainer } from 'src/app/shared/utils/subscription-container';
 
 @Component({
-  selector: 'app-infrared-signals',
-  templateUrl: './infrared-signals.component.html',
-  styleUrls: ['./infrared-signals.component.scss'],
+	selector: 'app-infrared-signals',
+	templateUrl: './infrared-signals.component.html',
+	styleUrls: ['./infrared-signals.component.scss'],
 })
 export class InfraredSignalsComponent implements OnInit, OnDestroy {
-  subscriptions = new SubscriptionsContainer();
+	subscriptions = new SubscriptionsContainer();
 
-  isInfraredDialogVisible = false;
+	isInfraredEditDialogVisible = false;
 
-  isDeleteInfraredSignalDialogVisible = false;
+	isDeleteInfraredSignalDialogVisible = false;
 
-  isDeleteInfraredSignalsDialogVisible = false; // multiple signals dialog
+	isDeleteInfraredSignalsDialogVisible = false; // multiple signals dialog
 
-  infraredSignals: InfraredSignal[] = [];
+	infraredSignals: InfraredSignal[] = [];
 
-  infraredSignal: InfraredSignal = {} as InfraredSignal;
+	infraredSignal: InfraredSignal = {} as InfraredSignal;
 
-  selectedInfraredSignals: any[] = [];
+	selectedInfraredSignals: any[] = [];
 
-  submitted = false;
+	outputs: any[] = [];
 
-  cols: any[] = [];
+	rowsPerPageOptions = [5, 10, 20];
 
-  outputs: any[] = [];
+	constructor(
+		private messageService: MessageService,
+		private infraredSignalsService: InfraredSignalsService,
+	) {}
 
-  rowsPerPageOptions = [5, 10, 20];
+	ngOnInit() {
+		this.loadSignals();
 
-  constructor(
-    private messageService: MessageService,
-    private infraredSignalsService: InfraredSignalsService,
-  ) {}
+		this.outputs = [{ label: '1' }, { label: '2' }, { label: '3' }, { label: '4' }];
+	}
 
-  ngOnInit() {
-    this.loadSignals();
+	ngOnDestroy() {
+		this.subscriptions.dispose();
+	}
 
-    this.cols = [
-      { field: 'product', header: 'Product' },
-      { field: 'price', header: 'Price' },
-      { field: 'category', header: 'Category' },
-      { field: 'rating', header: 'Reviews' },
-      { field: 'inventoryStatus', header: 'Status' },
-    ];
+	onDeleteInfraredSignalClick(infraredSignal: InfraredSignal) {
+		this.isDeleteInfraredSignalDialogVisible = true;
+		this.infraredSignal = { ...infraredSignal };
+	}
 
-    this.outputs = [
-      { label: 'Output1', value: 'output1' },
-      { label: 'Output2', value: 'output2' },
-      { label: 'Output3', value: 'output3' },
-      { label: 'Output4', value: 'output4' },
-    ];
-  }
+	onConfirmDeleteInfraredSignalClick() {
+		this.subscriptions.add(
+			this.infraredSignalsService.deleteInfraredSignal(this.infraredSignal).subscribe({
+				error: (err) => {
+					this.messageService.add({
+						severity: 'error',
+						summary: 'Error',
+						detail: 'Deleting Infrared Signal',
+						life: 3000,
+					});
+				},
+				complete: () => {
+					this.messageService.add({
+						severity: 'success',
+						summary: 'Successful',
+						detail: 'Infrared Signal deleted',
+						life: 3000,
+					});
 
-  ngOnDestroy() {
-    this.subscriptions.dispose();
-  }
+					this.infraredSignals = this.infraredSignals.filter((val) => val.id !== this.infraredSignal.id);
+					this.infraredSignal = {} as InfraredSignal;
+				},
+			}),
+		);
 
-  onNewClick() {
-    this.infraredSignal = {} as InfraredSignal;
-    this.submitted = false;
-    this.isInfraredDialogVisible = true;
-  }
+		this.isDeleteInfraredSignalDialogVisible = false;
+	}
 
-  onDeleteClick() {
-    this.isDeleteInfraredSignalsDialogVisible = true;
-  }
+	onDeleteMultipleInfraredSignalsClick() {
+		// not implemented yet
+		// this.isDeleteInfraredSignalsDialogVisible = true;
+	}
 
-  onEditInfraredSignalClick(infraredSignal: InfraredSignal) {
-    this.infraredSignal = { ...infraredSignal };
-    this.isInfraredDialogVisible = true;
-  }
+	onConfirmDeleteMultipleInfraredSignalsClick() {
+		// not implemented yet
+		// this.isDeleteInfraredSignalsDialogVisible = false;
+		// this.infraredSignals = this.infraredSignals.filter((val) => !this.selectedInfraredSignals.includes(val));
+		// this.messageService.add({
+		// 	severity: 'success',
+		// 	summary: 'Successful',
+		// 	detail: 'Signals Deleted',
+		// 	life: 3000,
+		// });
+		// this.selectedInfraredSignals = [];
+	}
 
-  onDeleteInfraredSignalClick(infraredSignal: InfraredSignal) {
-    this.isDeleteInfraredSignalDialogVisible = true;
-    // this.infraredSignal = { ...infraredSignal };
-  }
+	onEditInfraredSignalClick(infraredSignal: InfraredSignal) {
+		this.infraredSignal = { ...infraredSignal };
+		this.isInfraredEditDialogVisible = true;
+	}
 
-  onConfirmDeleteMultipleInfraredSignalsClick() {
-    this.isDeleteInfraredSignalsDialogVisible = false;
-    this.infraredSignals = this.infraredSignals.filter(
-      (val) => !this.selectedInfraredSignals.includes(val),
-    );
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Successful',
-      detail: 'Signals Deleted',
-      life: 3000,
-    });
-    this.selectedInfraredSignals = [];
-  }
+	onSaveEditInfraredSignalClick() {
+		this.subscriptions.add(
+			this.infraredSignalsService.updateInfraredSignal(this.infraredSignal).subscribe({
+				error: (err) => {
+					let detailMessage = 'Updating infrared signal.';
 
-  confirmDelete() {
-    this.isDeleteInfraredSignalDialogVisible = false;
-    // this.infraredSignals = this.infraredSignals.filter((val) => val.id !== this.product.id);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Successful',
-      detail: 'Signal Deleted',
-      life: 3000,
-    });
-    this.infraredSignal = {} as InfraredSignal;
-  }
+					if (err.status === 409) detailMessage = err.error;
 
-  onHideInfraredDialogClick() {
-    this.isInfraredDialogVisible = false;
-    this.submitted = false;
-  }
+					this.messageService.add({
+						severity: 'error',
+						summary: 'Error',
+						detail: detailMessage,
+						life: 3000,
+					});
+				},
+				complete: () => {
+					this.messageService.add({
+						severity: 'success',
+						summary: 'Successful',
+						detail: 'Infrared signal updated',
+						life: 3000,
+					});
 
-  onSaveInfraredSignalClick() {
-    //
-  }
+					const index = this.infraredSignals.findIndex((signal) => signal.id === this.infraredSignal.id);
+					if (index !== -1) {
+						this.infraredSignals[index] = this.infraredSignal;
+					}
+				},
+			}),
+		);
+		this.isInfraredEditDialogVisible = false;
+	}
 
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-  }
+	onHideInfraredDialogClick() {
+		this.isInfraredEditDialogVisible = false;
+	}
 
-  private loadSignals() {
-    this.subscriptions.add(
-      this.infraredSignalsService.getInfraredSignals().subscribe({
-        next: (infraredSignals) => {
-          this.infraredSignals = infraredSignals;
-        },
-        error: (error) => {
-          const message = this.getErrorMessage(error);
+	onGlobalFilter(table: Table, event: Event) {
+		table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+	}
 
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: message,
-            life: 3000,
-          });
-        },
-      }),
-    );
-  }
+	private loadSignals() {
+		this.subscriptions.add(
+			this.infraredSignalsService.getInfraredSignals().subscribe({
+				next: (infraredSignals) => {
+					this.infraredSignals = infraredSignals;
+				},
+				error: (error) => {
+					const message = this.getErrorMessage(error);
 
-  private getErrorMessage(error: any): string {
-    if (error.status === 401) {
-      return 'You are not logged in.';
-    } else if (error.status === 0){
-      return 'Server error.'
-    }
-    return 'Unknown error.';
-  }
+					this.messageService.add({
+						severity: 'error',
+						summary: 'Error',
+						detail: message,
+						life: 3000,
+					});
+				},
+			}),
+		);
+	}
+
+	private getErrorMessage(error: any): string {
+		if (error.status === 401) {
+			return 'You are not logged in.';
+		} else if (error.status === 0) {
+			return 'Server error.';
+		}
+		return 'Unknown error.';
+	}
 }

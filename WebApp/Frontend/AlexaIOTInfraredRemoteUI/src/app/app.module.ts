@@ -46,7 +46,7 @@ import { MessageService } from 'primeng/api';
         ignoreNonceAfterRefresh: true, // this is required if the id_token is not returned
         useRefreshToken: true,
         logLevel: LogLevel.Debug,
-        secureRoutes: [environment.apiUrl],
+        secureRoutes: [environment.apiUrl, environment.authServerUrl],
       },
     }),
     ButtonModule,

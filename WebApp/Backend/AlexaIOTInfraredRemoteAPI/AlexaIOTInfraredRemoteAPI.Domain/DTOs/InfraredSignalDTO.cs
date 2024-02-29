@@ -2,6 +2,7 @@
 {
     public class InfraredSignalDTO
     {
+        public Guid Id { get; set; }
         public string Description { get; set; }
         public ushort[] InfraredData { get; set; }
         public int Length { get; set; }

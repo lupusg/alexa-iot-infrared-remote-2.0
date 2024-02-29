@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AiirContext))]
-    [Migration("20231221082537_UshortInfraredSignalData")]
-    partial class UshortInfraredSignalData
+    [Migration("20240116150704_newBoardDataModel")]
+    partial class newBoardDataModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,10 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Secret")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

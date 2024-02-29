@@ -1,1 +1,89 @@
-<p>board-settings works!</p>
+<!-- eslint-disable @angular-eslint/template/no-autofocus -->
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
+<!-- eslint-disable @angular-eslint/template/elements-content -->
+<div class="grid">
+	<div class="col-12">
+		<div class="card px-6 py-6">
+			<p-toast></p-toast>
+			<p-toolbar styleClass="mb-4">
+				<ng-template pTemplate="left">
+					<div class="my-2">
+						<button pButton pRipple label="New board" icon="pi pi-plus" class="p-button-success mr-2" (click)="onNewBoardButtonClick()"></button>
+					</div>
+				</ng-template>
+
+				<ng-template pTemplate="right"> </ng-template>
+			</p-toolbar>
+
+			<p-table #dt [value]="boards" [columns]="cols" responsiveLayout="scroll" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10, 20, 30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowHover]="true" dataKey="name">
+				<ng-template pTemplate="caption">
+					<div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+						<h5 class="m-0">Manage Boards</h5>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th>Name</th>
+						<th>Secret</th>
+						<th></th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-board>
+					<tr>
+						<td style="width: 20%; min-width: 10rem">
+							<span class="p-column-title">Name</span>
+							{{ board.name }}
+						</td>
+						<td style="width: 80%; min-width: 10rem">
+							<span class="p-column-title">Secret</span>
+							<div class="flex align-items-center flex-wrap gap-3">
+
+								{{ showSecret ? board.secret : board.secret | password}}
+								<button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-secondary p-button-text" (click)="showSecret = !showSecret"></button>
+							</div>
+						</td>
+						<td>
+							<div class="flex">
+								<button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteBoard(board)"></button>
+							</div>
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+
+		<p-dialog [(visible)]="addBoardDialog" [style]="{ width: '450px' }" header="Board Details" [modal]="true" class="p-fluid">
+			<ng-template pTemplate="content">
+				<div class="field">
+					<label for="name">Name</label>
+					<input type="text" pInputText id="name" [(ngModel)]="board.name" required autofocus [ngClass]="{ 'ng-invalid ng-dirty': addBoardSubmitted && !board.name }" />
+					<small class="ng-dirty ng-invalid" *ngIf="addBoardSubmitted && !board.name">Name is required.</small>
+				</div>
+				<div class="field">
+					<label for="secret">Secret</label>
+					<input type="password" pInputText id="name" [(ngModel)]="board.secret" required autofocus [ngClass]="{ 'ng-invalid ng-dirty': addBoardSubmitted && !board.secret }" />
+					<small class="ng-dirty ng-invalid" *ngIf="addBoardSubmitted && !board.secret">Secret is required.</small>
+				</div>
+			</ng-template>
+
+			<ng-template pTemplate="footer">
+				<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="onCancelButtonClick()"></button>
+				<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSaveBoardButtonClick()"></button>
+			</ng-template>
+		</p-dialog>
+
+		<p-dialog [(visible)]="deleteBoardDialog" header="Confirm" [modal]="true" [style]="{ width: '450px' }">
+			<div class="flex align-items-center justify-content-center">
+				<i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+				<span *ngIf="board"
+					>Are you sure you want to delete <b>{{ board.name }}</b
+					>?
+				</span>
+			</div>
+			<ng-template pTemplate="footer">
+				<button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteBoardDialog = false"></button>
+				<button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteBoard()"></button>
+			</ng-template>
+		</p-dialog>
+	</div>
+</div>

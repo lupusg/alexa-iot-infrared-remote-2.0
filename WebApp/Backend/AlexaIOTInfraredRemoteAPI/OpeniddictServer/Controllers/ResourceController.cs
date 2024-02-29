@@ -8,6 +8,7 @@ using OpeniddictServer.Data;
 namespace OpeniddictServer.Controllers;
 
 [Route("api")]
+[ApiExplorerSettings(IgnoreApi = true)]
 public class ResourceController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;

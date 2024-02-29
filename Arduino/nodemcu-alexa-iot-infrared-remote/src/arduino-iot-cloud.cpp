@@ -1,10 +1,10 @@
 #include "arduino-iot-cloud-connection.h"
 
-CloudSwitch ArduinoIoTCloudConnection::ir_signal_output1_;
-CloudSwitch ArduinoIoTCloudConnection::ir_signal_output2_;
-CloudSwitch ArduinoIoTCloudConnection::ir_signal_output3_;
-CloudSwitch ArduinoIoTCloudConnection::ir_signal_output4_;
-CloudSwitch ArduinoIoTCloudConnection::ir_receiver_;
+CloudSwitch ArduinoIoTCloudConnection::infrared_output1_;
+CloudSwitch ArduinoIoTCloudConnection::infrared_output2_;
+CloudSwitch ArduinoIoTCloudConnection::infrared_output3_;
+CloudSwitch ArduinoIoTCloudConnection::infrared_output4_;
+CloudSwitch ArduinoIoTCloudConnection::infrared_receiver_;
 
 InfraredTransmitter *ArduinoIoTCloudConnection::infrared_transmitter_ = nullptr;
 HTTPClientSecure *ArduinoIoTCloudConnection::http_client_secure_ = nullptr;
@@ -25,15 +25,15 @@ void ArduinoIoTCloudConnection::setup() {
   ArduinoCloud.setBoardId(device_login_name_);
   ArduinoCloud.setSecretDeviceKey(device_key_);
 
-  ArduinoCloud.addProperty(ir_signal_output1_, READWRITE, ON_CHANGE,
+  ArduinoCloud.addProperty(infrared_output1_, READWRITE, ON_CHANGE,
                            &ArduinoIoTCloudConnection::OnIrSignalOutput1Change);
-  ArduinoCloud.addProperty(ir_signal_output2_, READWRITE, ON_CHANGE,
+  ArduinoCloud.addProperty(infrared_output2_, READWRITE, ON_CHANGE,
                            &ArduinoIoTCloudConnection::OnIrSignalOutput2Change);
-  ArduinoCloud.addProperty(ir_signal_output3_, READWRITE, ON_CHANGE,
+  ArduinoCloud.addProperty(infrared_output3_, READWRITE, ON_CHANGE,
                            &ArduinoIoTCloudConnection::OnIrSignalOutput3Change);
-  ArduinoCloud.addProperty(ir_signal_output4_, READWRITE, ON_CHANGE,
+  ArduinoCloud.addProperty(infrared_output4_, READWRITE, ON_CHANGE,
                            &ArduinoIoTCloudConnection::OnIrSignalOutput4Change);
-  ArduinoCloud.addProperty(ir_receiver_, READWRITE, ON_CHANGE,
+  ArduinoCloud.addProperty(infrared_receiver_, READWRITE, ON_CHANGE,
                            &ArduinoIoTCloudConnection::OnIrReceiverChange);
 
   ArduinoCloud.begin(arduino_iot_preferred_connection_);
@@ -43,7 +43,7 @@ void ArduinoIoTCloudConnection::setup() {
 
 void ArduinoIoTCloudConnection::loop() { ArduinoCloud.update(); }
 
-bool ArduinoIoTCloudConnection::get_ir_receiver_state() { return ir_receiver_; }
+bool ArduinoIoTCloudConnection::get_ir_receiver_state() { return infrared_receiver_; }
 
 void ArduinoIoTCloudConnection::OnIrSignalOutput1Change() {
   uint16_t length;
@@ -90,7 +90,7 @@ void ArduinoIoTCloudConnection::OnIrSignalOutput4Change() {
 }
 
 void ArduinoIoTCloudConnection::OnIrReceiverChange() {
-  if (ir_receiver_) {
+  if (infrared_receiver_) {
     Serial.println("Infrared receiving is turned on!");
   } else {
     Serial.println("Infrared receiving is turned off!");

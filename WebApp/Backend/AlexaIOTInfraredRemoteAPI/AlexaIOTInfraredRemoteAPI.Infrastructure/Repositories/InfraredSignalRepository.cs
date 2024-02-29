@@ -8,6 +8,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Repositories
     {
         public InfraredSignalRepository(AiirContext context) : base(context)
         {
+
         }
     }
 }

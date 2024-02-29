@@ -4,6 +4,7 @@ using AlexaIOTInfraredRemoteAPI.Openiddict;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 
 internal class Program
@@ -178,8 +179,8 @@ internal class Program
         try
         {
             await context.Database.MigrateAsync();
-            if (app.Environment.IsDevelopment())
-                await AiirContextSeed.SeedAsync(context);
+            //if (app.Environment.IsDevelopment())
+            //    await AiirContextSeed.SeedAsync(context);
         }
         catch (Exception ex)
         {

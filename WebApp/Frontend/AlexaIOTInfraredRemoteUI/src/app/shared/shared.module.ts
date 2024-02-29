@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { PasswordPipe } from './pipes/password.pipe';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+	declarations: [PasswordPipe],
+	imports: [CommonModule],
+	exports: [PasswordPipe],
 })
-export class SharedModule { }
+export class SharedModule {}
