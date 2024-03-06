@@ -6,6 +6,7 @@ import { AppFooterComponent } from './components/footer/app.footer.component';
 import { AppMenuComponent } from './components/menu/app.menu.component';
 import { AppMenuitemComponent } from './components/menu/menu-item/app.menuitem.component';
 import { RouterModule } from '@angular/router';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { RouterModule } from '@angular/router';
     AppMenuComponent,
     AppMenuitemComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MenuModule],
   exports: [
     AppTopBarComponent,
     AppSidebarComponent,
