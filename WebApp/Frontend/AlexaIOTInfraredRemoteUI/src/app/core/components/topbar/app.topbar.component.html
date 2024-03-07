@@ -1,33 +1,38 @@
 <div class="layout-topbar">
-    <a class="layout-topbar-logo" routerLink="">
-        <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
-        <span>AIIR Manager</span>
-    </a>
+	<a class="layout-topbar-logo" routerLink="">
+		<img src="assets/layout/images/{{ layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white' }}.svg" alt="logo" />
+		<span>AIIR Manager</span>
+	</a>
 
-    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
-        <i class="pi pi-bars"></i>
-    </button>
+	<button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+		<i class="pi pi-bars"></i>
+	</button>
 
-    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
-        <i class="pi pi-ellipsis-v"></i>
-    </button>
+	<button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+		<i class="pi pi-ellipsis-v"></i>
+	</button>
 
-    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <ng-container *ngIf="userData$ | async as user">
-            <button *ngIf="!user.userData" class="p-link layout-topbar-button" (click)="login()">
-                <i class="pi pi-user"></i>
-                <span>Profile</span>
-            </button>
-            <p-menu #menu [model]="items" [popup]="true"></p-menu>
-            <div class="flex align-items-center justify-content-center" >{{user.userData.email}}</div>
-            <button *ngIf="user.userData" class="p-link layout-topbar-button" (click)="menu.toggle($event)">
-                <img *ngIf="user.userData.picture" class="layout-topbar-user-image" [src]="user.userData.picture" alt="User Profile Picture" />
-                <img *ngIf="!user.userData.picture" class="layout-topbar-user-image" src="../../../../assets/pictures/no-user-image.jpg" alt="User Profile Picture" />
-            </button>
-        </ng-container>
-        <button class="p-link layout-topbar-button">
-            <i class="pi pi-cog"></i>
-            <span>Settings</span>
-        </button>
-    </div>
+	<div #topbarmenu class="layout-topbar-menu" [ngClass]="{ 'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible }">
+		<ng-container *ngIf="userData$ | async as user">
+			<!-- If the user is not logged in, show the login button -->
+			<button *ngIf="!user.userData; else loggedIn" class="p-link layout-topbar-button" (click)="login()">
+				<i class="pi pi-user"></i>
+				<span>Profile</span>
+			</button>
+
+			<!-- Else if the user is logged in show its name, profile picture and the menu -->
+			<ng-template #loggedIn>
+				<p-menu #menu [model]="items" [popup]="true"></p-menu>
+				<div class="flex align-items-center justify-content-center">{{ user.userData.email }}</div>
+				<button *ngIf="user.userData" class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+					<img *ngIf="user.userData.picture" class="layout-topbar-user-image" [src]="user.userData.picture" alt="User Profile Picture" />
+					<img *ngIf="!user.userData.picture" class="layout-topbar-user-image" src="../../../../assets/pictures/no-user-image.jpg" alt="User Profile Picture" />
+				</button>
+			</ng-template>
+		</ng-container>
+		<button class="p-link layout-topbar-button">
+			<i class="pi pi-cog"></i>
+			<span>Settings</span>
+		</button>
+	</div>
 </div>
