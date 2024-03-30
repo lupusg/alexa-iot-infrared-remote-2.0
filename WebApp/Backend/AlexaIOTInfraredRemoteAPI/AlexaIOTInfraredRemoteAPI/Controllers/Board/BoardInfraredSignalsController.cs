@@ -20,8 +20,8 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers.Board
         }
 
         [HttpGet]
-        [Route("infrared-signal/{infraredSignalOutput}")]
-        public async Task<ActionResult> GetInfraredSignal([FromRoute] string infraredSignalOutput)
+        [Route("infrared-signal/{infraredSignalOutput}/{state}")]
+        public async Task<ActionResult> GetInfraredSignal([FromRoute] string infraredSignalOutput, [FromRoute] bool state)
         {
             var clientId = User?.Claims?.FirstOrDefault(c => c.Type == "sub").Value;
 
@@ -32,7 +32,7 @@ namespace AlexaIOTInfraredRemoteAPI.Controllers.Board
 
             try
             {
-                var infraredSignal = await _userService.GetInfraredSignalByOutput(clientId, infraredSignalOutput);
+                var infraredSignal = await _userService.GetInfraredSignalByOutput(clientId, infraredSignalOutput, state);
                 var infraredData = infraredSignal.InfraredData;
 
                 byte[] buffer = new byte[infraredData.Length * sizeof(ushort) + sizeof(ushort)];

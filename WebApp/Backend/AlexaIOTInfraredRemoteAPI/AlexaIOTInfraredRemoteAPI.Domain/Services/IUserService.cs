@@ -6,7 +6,7 @@ namespace AlexaIOTInfraredRemoteAPI.Domain.Services
     {
         /* Infrared Signals */
         Task<IReadOnlyCollection<InfraredSignalDTO>> GetInfraredSignals(Guid userId);
-        Task<InfraredSignal> GetInfraredSignalByOutput(string clientId, string infraredSignalOutput);
+        Task<InfraredSignal> GetInfraredSignalByOutput(string clientId, string infraredSignalOutput, bool state);
         Task<InfraredSignal> CreateInfraredSignal(string clientId, string infraredDataRaw);
         Task UpdateInfraredSignal(Guid userId, InfraredSignalDTO infraredSignalUpdate);
         Task DeleteInfraredSignal(Guid guid, InfraredSignalDTO infraredSignalDelete);

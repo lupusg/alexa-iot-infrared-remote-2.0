@@ -49,7 +49,7 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
         {
             var board = await _userRepository.GetBoardByName(clientId);
             var infraredData = InfraredDataExtractor.ExtractRawData(infraredDataRaw);
-            var infraredSignal = InfraredSignal.Create("N/A", infraredData, infraredData.Length, "N/A", DateTime.Now);
+            var infraredSignal = InfraredSignal.Create("N/A", infraredData, infraredData.Length, "N/A", DateTime.Now, false);
 
             board.AddInfraredSignal(infraredSignal);
             _infraredSignalRepository.Add(infraredSignal);
@@ -58,11 +58,11 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
             return infraredSignal;
         }
 
-        public async Task<InfraredSignal> GetInfraredSignalByOutput(string clientId, string infraredSignalOutput)
+        public async Task<InfraredSignal> GetInfraredSignalByOutput(string clientId, string infraredSignalOutput, bool state)
         {
             var board = await _userRepository.GetBoardByName(clientId);
             var infraredSignal =
-                board.InfraredSignals.First(signal => signal.IrSignalOutput.Equals(infraredSignalOutput));
+                board.InfraredSignals.First(signal => signal.IrSignalOutput.Equals(infraredSignalOutput) && signal.State == state);
 
             return infraredSignal;
         }
@@ -70,19 +70,20 @@ namespace AlexaIOTInfraredRemoteAPI.Application.Services
         public async Task UpdateInfraredSignal(Guid userId, InfraredSignalDTO infraredSignalUpdate)
         {
             var user = await _userRepository.GetByExternalId(userId);
-            var infraredSignal = user.Boards
-                .SelectMany(board => board.InfraredSignals)
-                .First(signal => signal.Id == infraredSignalUpdate.Id);
+            var infraredSignals = user.Boards.SelectMany(board => board.InfraredSignals).ToList();
 
-            var infraredSignalWithSameOutput = user.Boards
-                .SelectMany(board => board.InfraredSignals)
-                .FirstOrDefault(signal => signal.IrSignalOutput == infraredSignalUpdate.IrSignalOutput);
+            var infraredSignal = infraredSignals.First(signal => signal.Id == infraredSignalUpdate.Id);
+
+            var infraredSignalWithSameOutput = infraredSignals.FirstOrDefault(signal =>
+                signal.IrSignalOutput == infraredSignalUpdate.IrSignalOutput
+                && signal.IrSignalOutput != "N/A"
+                && signal.State == infraredSignalUpdate.State
+                && signal.Id != infraredSignalUpdate.Id);
 
             if (infraredSignalWithSameOutput != null)
-            {
                 throw new InfraredOutputAlreadyExistsException();
-            }
 
+            infraredSignal.ChangeState(infraredSignalUpdate.State);
             infraredSignal.ChangeDescription(infraredSignalUpdate.Description);
             infraredSignal.ChangeIrSignalOutput(infraredSignalUpdate.IrSignalOutput);
 

@@ -13,6 +13,8 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
         public string IrSignalOutput { get; private set; } = string.Empty;
         public Guid? BoardId { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public bool State { get; private set; }
+
         public string InfraredDataString
         {
             get => JsonConvert.SerializeObject(InfraredData);
@@ -25,13 +27,16 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
         }
 
         public static InfraredSignal Create(string description, ushort[] infraredData, int length,
-            string irSignalOutput, DateTime createdAt)
+            string irSignalOutput, DateTime createdAt, bool state)
         {
             if (string.IsNullOrEmpty(description))
                 throw new ArgumentException("The description can't be empty");
 
             if (string.IsNullOrEmpty(irSignalOutput))
                 throw new ArgumentException("The assigned button can't be null");
+
+            if (length <= 0)
+                throw new ArgumentException("The length must be greater than zero.");
 
             InfraredSignal infraredSignal = new()
             {
@@ -40,7 +45,8 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
                 Length = length,
                 IrSignalOutput = irSignalOutput,
                 CreatedAt = createdAt,
-                Id = Guid.NewGuid()
+                State = state,
+                Id = Guid.NewGuid(),
             };
 
             return infraredSignal;
@@ -59,11 +65,16 @@ namespace AlexaIOTInfraredRemoteAPI.Domain
             if (string.IsNullOrEmpty(irSignalOutput))
                 throw new ArgumentException("The irSignalOutput can't be null");
 
-            if(!int.TryParse(irSignalOutput, out int value))
+            if (irSignalOutput != "N/A" && !int.TryParse(irSignalOutput, out int value))
                 throw new ArgumentException("The irSignalOutput must be a number");
 
 
             this.IrSignalOutput = irSignalOutput;
+        }
+
+        public void ChangeState(bool state)
+        {
+            this.State = state;
         }
     }
 }

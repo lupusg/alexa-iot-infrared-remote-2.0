@@ -27,6 +27,8 @@ export class InfraredSignalsComponent implements OnInit, OnDestroy {
 
 	outputs: any[] = [];
 
+	states: any[] = [];
+
 	rowsPerPageOptions = [5, 10, 20];
 
 	constructor(
@@ -37,7 +39,8 @@ export class InfraredSignalsComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.loadSignals();
 
-		this.outputs = [{ label: '1' }, { label: '2' }, { label: '3' }, { label: '4' }];
+		this.initializeOutputOptions();
+		this.initializeStateOptions();
 	}
 
 	ngOnDestroy() {
@@ -168,5 +171,19 @@ export class InfraredSignalsComponent implements OnInit, OnDestroy {
 			return 'Server error.';
 		}
 		return 'Unknown error.';
+	}
+
+	private initializeOutputOptions() {
+		this.outputs = [{ label: 'N/A', value: 0 }];
+		for (let i = 1; i <= 4; i++) {
+			this.outputs.push({ label: i, value: i });
+		}
+	}
+
+	private initializeStateOptions() {
+		this.states = [
+			{ label: 'Turn on', value: 1 },
+			{ label: 'Turn off', value: 0 },
+		];
 	}
 }

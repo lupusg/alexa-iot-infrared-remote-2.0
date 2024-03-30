@@ -24,8 +24,10 @@ class ArduinoIoTCloudConnection {
   const char *device_login_name_;
   const char *device_key_;
   WiFiConnectionHandler arduino_iot_preferred_connection_;
+
   static InfraredTransmitter *infrared_transmitter_;
   static HTTPClientSecure *http_client_secure_;
+  static const char* base_url_;
 
   static CloudSwitch infrared_output1_;
   static CloudSwitch infrared_output2_;
@@ -33,11 +35,11 @@ class ArduinoIoTCloudConnection {
   static CloudSwitch infrared_output4_;
   static CloudSwitch infrared_receiver_;
 
-  static void OnIrSignalOutput1Change();
-  static void OnIrSignalOutput2Change();
-  static void OnIrSignalOutput3Change();
-  static void OnIrSignalOutput4Change();
-  static void OnIrReceiverChange();
+  static void OnInfraredOutput1Change();
+  static void OnInfraredOutput2Change();
+  static void OnInfraredOutput3Change();
+  static void OnInfraredOutput4Change();
+  static void OnInfraredReceiverChange();
 };
 
 #endif  // ARDUINO_IOT_CLOUD_H_

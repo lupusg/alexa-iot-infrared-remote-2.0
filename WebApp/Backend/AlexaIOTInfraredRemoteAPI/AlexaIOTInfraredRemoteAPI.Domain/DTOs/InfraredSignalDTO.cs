@@ -8,5 +8,6 @@
         public int Length { get; set; }
         public string IrSignalOutput { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool State { get; set; }
     }
 }

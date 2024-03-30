@@ -47,7 +47,6 @@ export class BoardSettingsComponent implements OnInit {
 	deleteBoard(board: Board) {
 		this.deleteBoardDialog = true;
 		this.board = board;
-		console.log(this.board);
 	}
 
 	confirmDeleteBoard() {

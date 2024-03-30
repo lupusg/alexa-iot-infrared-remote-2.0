@@ -73,6 +73,9 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
+                    b.Property<bool>("State")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BoardId");

@@ -5,6 +5,7 @@ CloudSwitch ArduinoIoTCloudConnection::infrared_output2_;
 CloudSwitch ArduinoIoTCloudConnection::infrared_output3_;
 CloudSwitch ArduinoIoTCloudConnection::infrared_output4_;
 CloudSwitch ArduinoIoTCloudConnection::infrared_receiver_;
+const char *ArduinoIoTCloudConnection::base_url_ = API_RESOURCE_SERVER_URL "/api/board/infrared-signal";
 
 InfraredTransmitter *ArduinoIoTCloudConnection::infrared_transmitter_ = nullptr;
 HTTPClientSecure *ArduinoIoTCloudConnection::http_client_secure_ = nullptr;
@@ -26,15 +27,16 @@ void ArduinoIoTCloudConnection::setup() {
   ArduinoCloud.setSecretDeviceKey(device_key_);
 
   ArduinoCloud.addProperty(infrared_output1_, READWRITE, ON_CHANGE,
-                           &ArduinoIoTCloudConnection::OnIrSignalOutput1Change);
+                           &ArduinoIoTCloudConnection::OnInfraredOutput1Change);
   ArduinoCloud.addProperty(infrared_output2_, READWRITE, ON_CHANGE,
-                           &ArduinoIoTCloudConnection::OnIrSignalOutput2Change);
+                           &ArduinoIoTCloudConnection::OnInfraredOutput2Change);
   ArduinoCloud.addProperty(infrared_output3_, READWRITE, ON_CHANGE,
-                           &ArduinoIoTCloudConnection::OnIrSignalOutput3Change);
+                           &ArduinoIoTCloudConnection::OnInfraredOutput3Change);
   ArduinoCloud.addProperty(infrared_output4_, READWRITE, ON_CHANGE,
-                           &ArduinoIoTCloudConnection::OnIrSignalOutput4Change);
-  ArduinoCloud.addProperty(infrared_receiver_, READWRITE, ON_CHANGE,
-                           &ArduinoIoTCloudConnection::OnIrReceiverChange);
+                           &ArduinoIoTCloudConnection::OnInfraredOutput4Change);
+  ArduinoCloud.addProperty(
+      infrared_receiver_, READWRITE, ON_CHANGE,
+      &ArduinoIoTCloudConnection::OnInfraredReceiverChange);
 
   ArduinoCloud.begin(arduino_iot_preferred_connection_);
   setDebugMessageLevel(2);
@@ -43,53 +45,71 @@ void ArduinoIoTCloudConnection::setup() {
 
 void ArduinoIoTCloudConnection::loop() { ArduinoCloud.update(); }
 
-bool ArduinoIoTCloudConnection::get_ir_receiver_state() { return infrared_receiver_; }
+bool ArduinoIoTCloudConnection::get_ir_receiver_state() {
+  return infrared_receiver_;
+}
 
-void ArduinoIoTCloudConnection::OnIrSignalOutput1Change() {
-  uint16_t length;
+void ArduinoIoTCloudConnection::OnInfraredOutput1Change() {
   static uint16_t *buffer = nullptr;
+  char current_url[90];
+  uint16_t length;
 
-  http_client_secure_->read_octet_stream(
-      API_RESOURCE_SERVER_URL "/api/board/infrared-signal/1", buffer, length);
+  snprintf(current_url, sizeof(current_url), "%s/1/%s", base_url_,
+           infrared_output1_ ? "true" : "false");
+
+  http_client_secure_->read_octet_stream(current_url, buffer, length);
+
   infrared_transmitter_->sendRaw(buffer, length);
 
   delete[] buffer;
 }
 
-void ArduinoIoTCloudConnection::OnIrSignalOutput2Change() {
-  uint16_t length;
+void ArduinoIoTCloudConnection::OnInfraredOutput2Change() {
   static uint16_t *buffer = nullptr;
+  char current_url[90];
+  uint16_t length;
 
-  http_client_secure_->read_octet_stream(
-      API_RESOURCE_SERVER_URL "/api/board/infrared-signal/2", buffer, length);
+  snprintf(current_url, sizeof(current_url), "%s/2/%s", base_url_,
+           infrared_output1_ ? "true" : "false");
+
+  http_client_secure_->read_octet_stream(current_url, buffer, length);
+
   infrared_transmitter_->sendRaw(buffer, length);
 
   delete[] buffer;
 }
 
-void ArduinoIoTCloudConnection::OnIrSignalOutput3Change() {
-  uint16_t length;
+void ArduinoIoTCloudConnection::OnInfraredOutput3Change() {
   static uint16_t *buffer = nullptr;
+  char current_url[90];
+  uint16_t length;
 
-  http_client_secure_->read_octet_stream(
-      API_RESOURCE_SERVER_URL "/api/board/infrared-signal/3", buffer, length);
+  snprintf(current_url, sizeof(current_url), "%s/3/%s", base_url_,
+           infrared_output1_ ? "true" : "false");
+
+  http_client_secure_->read_octet_stream(current_url, buffer, length);
+
   infrared_transmitter_->sendRaw(buffer, length);
 
   delete[] buffer;
 }
 
-void ArduinoIoTCloudConnection::OnIrSignalOutput4Change() {
-  uint16_t length;
+void ArduinoIoTCloudConnection::OnInfraredOutput4Change() {
   static uint16_t *buffer = nullptr;
+  char current_url[90];
+  uint16_t length;
 
-  http_client_secure_->read_octet_stream(
-      API_RESOURCE_SERVER_URL "/api/board/infrared-signal/4", buffer, length);
+  snprintf(current_url, sizeof(current_url), "%s/4/%s", base_url_,
+           infrared_output1_ ? "true" : "false");
+
+  http_client_secure_->read_octet_stream(current_url, buffer, length);
+
   infrared_transmitter_->sendRaw(buffer, length);
 
   delete[] buffer;
 }
 
-void ArduinoIoTCloudConnection::OnIrReceiverChange() {
+void ArduinoIoTCloudConnection::OnInfraredReceiverChange() {
   if (infrared_receiver_) {
     Serial.println("Infrared receiving is turned on!");
   } else {
