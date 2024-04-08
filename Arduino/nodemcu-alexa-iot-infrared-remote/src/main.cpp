@@ -13,7 +13,7 @@ InfraredReceiver infrared_receiver(IR_RECV_PIN, CAPTURE_BUFFER_SIZE,
 
 InfraredTransmitter infrared_transmitter(IR_SEND_PIN, IR_SEND_FREQUENCY);
 
-HTTPClientSecure http_client_secure(WIFI_SSID, WIFI_PASSWORD, API_DEV_CERTS);
+HTTPClientSecure http_client_secure(WIFI_SSID, WIFI_PASSWORD, API_PROD_CERTS);
 
 ArduinoIoTCloudConnection iot_cloud_connection(infrared_transmitter,
                                                http_client_secure, WIFI_SSID,
