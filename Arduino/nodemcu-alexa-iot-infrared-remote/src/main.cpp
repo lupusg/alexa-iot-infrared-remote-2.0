@@ -25,6 +25,11 @@ ApiLoginService api_login_service(http_client_secure, API_KEY, API_SECRET);
 InfraredReceiverService infrared_receiver_service(infrared_receiver,
                                                   http_client_secure);
 
+unsigned long lastRefreshTime =
+    0;  // will store the last time the token was refreshed
+unsigned long refreshInterval =
+    5 * 60 * 1000 - 10000;  // refresh interval in milliseconds (5 minutes)
+
 void setup() {
   Serial.begin(BAUD_RATE);
   iot_cloud_connection.setup();
@@ -43,6 +48,13 @@ void loop() {
 
   if (iot_cloud_connection.get_ir_receiver_state()) {
     infrared_receiver_service.post_ir_signal();
+  }
+
+  if (millis() - lastRefreshTime >= refreshInterval) {
+    String api_token = api_login_service.login(API_AUTHZ_SERVER_URL);
+    http_client_secure.set_bearer_token(api_token);
+    
+    lastRefreshTime = millis();
   }
 
   http_client_secure.loop();
