@@ -109,7 +109,8 @@ public class Startup
                         .WithOrigins(
                             "https://localhost:4200", "https://localhost:4204",
                             "https://yellow-stone-0df16c003.3.azurestaticapps.net/",
-                            "https://localhost:5001")
+                            "https://localhost:5001",
+                            "https://iot-infrared-remote.com/")
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
