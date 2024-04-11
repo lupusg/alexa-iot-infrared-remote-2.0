@@ -7,7 +7,7 @@ To set up and use the Alexa-IoT-Infrared-Remote 2.0 project, you'll need the fol
 - Breadboard, jumper wires
 
 # Setup
-1. Assemble your board.
+1. Assemble your board (IR Receiver Pin 14, IR Transmitter Pin 4). (See config.h for pins)
 2. Setup an account on [Arduino Cloud](https://app.arduino.cc/).
 3. Configure your NodeMCU-32s board with Arduino Cloud. (See [Getting Started with Arduino Cloud](https://docs.arduino.cc/arduino-cloud/guides/overview/))
 4. Add the following Cloud Variables [Screenshoot](https://prnt.sc/tNIS_IdNYF53)
