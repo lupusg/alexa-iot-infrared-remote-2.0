@@ -8,13 +8,19 @@ namespace OpeniddictServer
     public class Worker : IHostedService
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly IConfiguration _configuration;
 
-        public Worker(IServiceProvider serviceProvider)
-            => _serviceProvider = serviceProvider;
+        public Worker(IServiceProvider serviceProvider, IConfiguration configuration)
+        {
+            _serviceProvider = serviceProvider;
+            _configuration = configuration;
+        }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             using var scope = _serviceProvider.CreateScope();
+            var redirectUris = _configuration.GetSection("Openiddict:RedirectURIs").Get<List<string>>();
+
 
             var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             await context.Database.EnsureCreatedAsync(cancellationToken);
@@ -42,13 +48,13 @@ namespace OpeniddictServer
                         {
                             new Uri("https://localhost:4200"),
                             new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net"),
-                            new Uri("https://iot-infrared-remote.com/")
+                            new Uri("https://iot-infrared-remote.com")
                         },
                         RedirectUris =
                         {
                             new Uri("https://localhost:4200"),
                             new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net"),
-                            new Uri("https://iot-infrared-remote.com/")
+                            new Uri("https://iot-infrared-remote.com")
                         },
                         Permissions =
                         {
