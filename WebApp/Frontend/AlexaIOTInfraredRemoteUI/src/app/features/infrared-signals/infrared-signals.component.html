@@ -55,11 +55,11 @@
 						</td>
 						<td style="width: 25%; min-width: 10rem">
 							<span class="p-column-title">Infrared Signal Output</span>
-							{{ infraredSignal.irSignalOutput }}
+							{{ infraredSignal.irSignalOutput === "N/A" ? "N/A" : infraredSignal.irSignalOutput + ' - Turn ' + (infraredSignal.state ? 'on' : 'off') }}
 						</td>
 						<td style="width: 25%; min-width: 8rem">
 							<span class="p-column-title">Created at</span>
-							{{ infraredSignal.createdAt | date: 'dd-MM-YYYY HH:mm' }}
+							{{ infraredSignal.createdAt | date: 'dd-MM-YYYY HH:mm:ss' }}
 						</td>
 						<td>
 							<div class="flex">
@@ -95,8 +95,19 @@
 					</p-dropdown>
 				</div>
 				<div class="field">
+					<label for="state">State</label>
+					<p-dropdown appendTo="body" [(ngModel)]="infraredSignal.state" optionLabel="label" optionValue="value" [options]="states" placeholder="Select">
+						<ng-template pTemplate="selectedItem">
+							<span>{{ infraredSignal.state ? "Turn on" : "Turn off" }}</span>
+						</ng-template>
+						<ng-template let-option pTemplate="item">
+							<span>{{ option.label }}</span>
+						</ng-template>
+					</p-dropdown>
+				</div>
+				<div class="field">
 					<label for="createdAt">Created at</label>
-					<input type="text" pInputText id="createdAt" [ngModel]="infraredSignal.createdAt | date: 'dd-MM-YYYY HH:mm'" readonly />
+					<input type="text" pInputText id="createdAt" [ngModel]="infraredSignal.createdAt | date: 'dd-MM-YYYY HH:mm:ss'" readonly />
 				</div>
 			</ng-template>
 

@@ -6,7 +6,6 @@ HTTPClientSecure::HTTPClientSecure(const char* ssid, const char* password,
   bearer_token_ = "";
   client_ = new WiFiClientSecure;
   client_->setCACert(certs_);
-  client_->setInsecure();
 }
 
 void HTTPClientSecure::setup() {

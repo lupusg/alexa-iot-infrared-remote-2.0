@@ -34,7 +34,8 @@ internal class Program
                         .AllowCredentials()
                         .WithOrigins(
                             "https://localhost:4200",
-                            "https://aiir-web2.azurewebsites.net/"
+                            "https://aiir-web2.azurewebsites.net/",
+                            "https://iot-infrared-remote.com/"
                             )
                         .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyHeader()

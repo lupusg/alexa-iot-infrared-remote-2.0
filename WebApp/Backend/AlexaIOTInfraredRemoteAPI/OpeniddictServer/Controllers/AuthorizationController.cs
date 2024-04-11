@@ -126,8 +126,6 @@ public class AuthorizationController : Controller
 
         switch (await _applicationManager.GetConsentTypeAsync(application))
         {
-            // If the consent is external (e.g when authorizations are granted by a sysadmin),
-            // immediately return an error if no authorization can be found in the database.
             case ConsentTypes.External when !authorizations.Any():
                 return Forbid(
                     authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
@@ -138,21 +136,12 @@ public class AuthorizationController : Controller
                             "The logged in user is not allowed to access this client application."
                     }));
 
-            // If the consent is implicit or if an authorization was found,
-            // return an authorization response without displaying the consent form.
-            case ConsentTypes.Implicit:
-            case ConsentTypes.External when authorizations.Any():
-            case ConsentTypes.Explicit when authorizations.Any() && !request.HasPrompt(Prompts.Consent):
+            default:
                 var principal = await _signInManager.CreateUserPrincipalAsync(user);
 
-                // Note: in this sample, the granted scopes match the requested scope
-                // but you may want to allow the user to uncheck specific scopes.
-                // For that, simply restrict the list of scopes before calling SetScopes.
                 principal.SetScopes(request.GetScopes());
                 principal.SetResources(await _scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
 
-                // Automatically create a permanent authorization to avoid requiring explicit consent
-                // for future authorization or token requests containing the same scopes.
                 var authorization = authorizations.LastOrDefault();
                 if (authorization == null)
                 {
@@ -172,27 +161,6 @@ public class AuthorizationController : Controller
                 }
 
                 return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-
-            // At this point, no authorization was found in the database and an error must be returned
-            // if the client application specified prompt=none in the authorization request.
-            case ConsentTypes.Explicit when request.HasPrompt(Prompts.None):
-            case ConsentTypes.Systematic when request.HasPrompt(Prompts.None):
-                return Forbid(
-                    authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-                    properties: new AuthenticationProperties(new Dictionary<string, string>
-                    {
-                        [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.ConsentRequired,
-                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
-                            "Interactive user consent is required."
-                    }));
-
-            // In every other case, render the consent form.
-            default:
-                return View(new AuthorizeViewModel
-                {
-                    ApplicationName = await _applicationManager.GetDisplayNameAsync(application),
-                    Scope = request.Scope
-                });
         }
     }
 
@@ -273,7 +241,12 @@ public class AuthorizationController : Controller
     public IActionResult Deny() => Forbid(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
 
     [HttpGet("~/connect/logout")]
-    public IActionResult Logout() => View();
+    public async Task<IActionResult> Logout()
+    {
+        // Directly call the LogoutPost method
+        return await LogoutPost();
+    }
+
 
     [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken]
     public async Task<IActionResult> LogoutPost()

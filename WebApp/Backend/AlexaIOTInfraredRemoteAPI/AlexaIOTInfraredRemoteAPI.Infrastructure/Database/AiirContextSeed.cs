@@ -17,7 +17,7 @@ namespace AlexaIOTInfraredRemoteAPI.Infrastructure.Database
                 for (var i = 0; i < 20; ++i)
                 {
                     var signal = InfraredSignal.Create($"description{i}", new ushort[] { 1, 2, 3, 4, 5 }, 5, $"output{i}",
-                        DateTime.Now.AddHours(i));
+                        DateTime.Now.AddHours(i), i % 2 == 0);
                     infraredSignals.Add(signal);
                     boards[0].AddInfraredSignal(signal);
                 }
