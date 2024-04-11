@@ -41,12 +41,14 @@ namespace OpeniddictServer
                         PostLogoutRedirectUris =
                         {
                             new Uri("https://localhost:4200"),
-                            new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net")
+                            new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net"),
+                            new Uri("https://iot-infrared-remote.com/")
                         },
                         RedirectUris =
                         {
                             new Uri("https://localhost:4200"),
-                            new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net")
+                            new Uri("https://yellow-stone-0df16c003.3.azurestaticapps.net"),
+                            new Uri("https://iot-infrared-remote.com/")
                         },
                         Permissions =
                         {
