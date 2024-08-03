@@ -1,0 +1,19 @@
+# Ignore all files by default
+* linguist-vendored
+
+# Include C# files
+*.cs linguist-vendored=false linguist-language=C#
+
+# Include C++ files
+*.cpp linguist-vendored=false linguist-language=C++
+*.h linguist-vendored=false linguist-language=C++
+
+# Include TypeScript files
+*.ts linguist-vendored=false linguist-language=TypeScript
+*.tsx linguist-vendored=false linguist-language=TypeScript
+
+# Include HTML files
+*.html linguist-vendored=false linguist-language=HTML
+
+# Include SCSS files
+*.scss linguist-vendored=false linguist-language=SCSS
