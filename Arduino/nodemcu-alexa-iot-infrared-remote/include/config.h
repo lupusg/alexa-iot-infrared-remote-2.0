@@ -4,37 +4,37 @@
 // API Settings
 #define API_PROD_CERTS                                                 \
   "-----BEGIN CERTIFICATE-----\n"                                      \
-  "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\n" \
+  "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\n" \
-  "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\n" \
+  "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\n" \
   "jzkwDgYDVR0PAQH/BAQDAgGGMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcD\n" \
   "AjB2BggrBgEFBQcBAQRqMGgwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2lj\n" \
   "ZXJ0LmNvbTBABggrBgEFBQcwAoY0aHR0cDovL2NhY2VydHMuZGlnaWNlcnQuY29t\n" \
   "L0RpZ2lDZXJ0R2xvYmFsUm9vdEcyLmNydDBCBgNVHR8EOzA5MDegNaAzhjFodHRw\n" \
   "Oi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRHbG9iYWxSb290RzIuY3JsMB0G\n" \
   "A1UdIAQWMBQwCAYGZ4EMAQIBMAgGBmeBDAECAjANBgkqhkiG9w0BAQwFAAOCAQEA\n" \
-  "loABcB94CeH6DWKwa4550BTzLxlTHVNseQJ5SetnPpBuPNLPgOLe9Y7ZMn4ZK6mh\n" \
-  "feK7RiMzan4UF9CD5rF3TcCevo3IxrdV+YfBwvlbGYv+6JmX3mAMlaUb23Y2pONo\n" \
-  "ixFJEOcAMKKR55mSC5W4nQ6jDfp7Qy/504MQpdjJflk90RHsIZGXVPw/JdbBp0w6\n" \
-  "pDb4o5CqydmZqZMrEvbGk1p8kegFkBekp/5WVfd86BdH2xs+GKO3hyiA8iBrBCGJ\n" \
-  "fqrijbRnZm7q5+ydXF3jhJDJWfxW5EBYZBJrUz/a+8K/78BjwI8z2VYJpG4t6r4o\n" \
-  "tOGB5sEyDPDwqx00Rouu8g==\n"                                         \
+  "AQkxu6RRPlD3yrYhxg9jIlVZKjAnC9H+D0SSq4j1I8dNImZ4QjexTEv+224CSvy4\n" \
+  "zfp9gmeRfC8rnrr4FN4UFppYIgqR4H7jIUVMG9ECUcQj2Ef11RXqKOg5LK3fkoFz\n" \
+  "/Nb9CYvg4Ws9zv8xmE1Mr2N6WDgLuTBIwul2/7oakjj8MA5EeijIjHgB1/0r5mPm\n" \
+  "eFYVx8xCuX/j7+q4tH4PiHzzBcfqb3k0iR4DlhiZfDmy4FuNWXGM8ZoMM43EnRN/\n" \
+  "meqAcMkABZhY4gqeWZbOgxber297PnGOCcIplOwpPfLu1A1K9frVwDzAG096a8L0\n" \
+  "+ItQCmz7TjRH4ptX5Zh9pw==\n"                                         \
   "-----END CERTIFICATE-----\n"
 
 #define API_DEV_CERTS                                                  \
@@ -59,17 +59,18 @@
   "-----END CERTIFICATE-----\n"
 
 #define API_AUTHZ_SERVER_URL "https://aiir-web2.azurewebsites.net"
-#define API_RESOURCE_SERVER_URL "https://aiir-web2.azurewebsites.net/resource-server"
-#define API_KEY ""
-#define API_SECRET ""
+#define API_RESOURCE_SERVER_URL \
+  "https://aiir-web2.azurewebsites.net/resource-server"
+#define API_KEY "vlad_super_secret_arduino_key0201"
+#define API_SECRET "vlad_super_secret_arduino_password0201"
 
 // IOT Cloud settings
-#define DEVICE_LOGIN_NAME ""
-#define DEVICE_KEY ""
+#define DEVICE_LOGIN_NAME "31f14eb8-ee6f-4b39-85d8-e4e709014780"
+#define DEVICE_KEY "xHEeLx1j7uizCdXJuUXnYjFT8"
 
 // Wi-Fi settings
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
+#define WIFI_SSID "Home 2.4G"
+#define WIFI_PASSWORD "nudauparola7789"
 
 // Board settings
 #define BAUD_RATE 115200
