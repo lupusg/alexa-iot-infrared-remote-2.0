@@ -18,8 +18,9 @@ To set up and use the Alexa-IoT-Infrared-Remote 2.0 project, you'll need the fol
 9. Replace API_KEY and API_SECRET with your credentials.
 10. Replace DEVICE_LOGIN_NAME and DEVICE_KEY with your credentials from Arduino Cloud.
 11. Replace WIFI_SSID and WIFI_PASSWORD with your wifi network name and password.
-12. Upload my Arduino code on your board.
-13. You can rename switches in Alexa App but DO NOT rename them on Arduino Cloud.
+12. **!! Important !!** You'll need to comment out the line "case State::RequestLastValues:    next_state = handle_RequestLastValues();    break;" from the file _.pio\libdeps\nodemcu-32s\ArduinoIoTCloud\src\ArduinoIoTCloudTCP.cpp_. If you don't, the board will send the last signal binded to the switch's specific state when it starts or restarts.
+13. Upload my Arduino code on your board.
+14. You can rename switches in Alexa App but DO NOT rename them on Arduino Cloud.
 
 # Usage
 To use the iot infrared remote, first clone an infrared signal from your existing remote. Then, visit my website and link the signal to an Alexa switch. You can rename Alexa switches so that instead of saying "Alexa, turn off Infrared Signal Output 1", you say "Alexa, turn off AC" and so on.
